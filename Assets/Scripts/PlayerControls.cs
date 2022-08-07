@@ -44,6 +44,51 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Primary Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b80bbce-3da5-4a27-8f16-49d36af8693f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Secondary Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""29d35e2a-518d-4992-8f2b-caaa936f189b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Utility"",
+                    ""type"": ""Button"",
+                    ""id"": ""904fea68-60f1-42b3-a067-52362b7f8446"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Special"",
+                    ""type"": ""Button"",
+                    ""id"": ""60e21fe5-c8aa-4e3a-ba1e-a9ddc6ea53ed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""16fe5f49-17c1-48fd-aa68-6f3f881dd221"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -134,6 +179,116 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""495b66f4-8f48-43b0-b069-2fb8156de658"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Primary Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c77cf4d-62f1-41d7-9264-0670c306ee20"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Primary Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a87cb45-5646-41ac-9d66-ed3d655fbc9c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Secondary Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87d72cb0-5251-48f7-8c65-8f28f6ef97c7"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Secondary Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78bf6b09-1c1f-4cf6-a5a7-05fc7fd7f023"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Special"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a37f1189-054d-45fb-9b21-b8b484675dad"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Special"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f99cb4ec-290f-4350-a806-6e66196f90c5"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f1e1245-8909-45b7-afe4-3c0816a03818"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18a77227-3813-480f-8f05-1c510ef15042"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Utility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20e995cc-c4a3-4cf9-929c-27d1d63bb586"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Utility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -172,6 +327,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Controls = asset.FindActionMap("Controls", throwIfNotFound: true);
         m_Controls_Movement = m_Controls.FindAction("Movement", throwIfNotFound: true);
         m_Controls_Aim = m_Controls.FindAction("Aim", throwIfNotFound: true);
+        m_Controls_PrimaryAttack = m_Controls.FindAction("Primary Attack", throwIfNotFound: true);
+        m_Controls_SecondaryAttack = m_Controls.FindAction("Secondary Attack", throwIfNotFound: true);
+        m_Controls_Utility = m_Controls.FindAction("Utility", throwIfNotFound: true);
+        m_Controls_Special = m_Controls.FindAction("Special", throwIfNotFound: true);
+        m_Controls_Dash = m_Controls.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -233,12 +393,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private IControlsActions m_ControlsActionsCallbackInterface;
     private readonly InputAction m_Controls_Movement;
     private readonly InputAction m_Controls_Aim;
+    private readonly InputAction m_Controls_PrimaryAttack;
+    private readonly InputAction m_Controls_SecondaryAttack;
+    private readonly InputAction m_Controls_Utility;
+    private readonly InputAction m_Controls_Special;
+    private readonly InputAction m_Controls_Dash;
     public struct ControlsActions
     {
         private @PlayerControls m_Wrapper;
         public ControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Controls_Movement;
         public InputAction @Aim => m_Wrapper.m_Controls_Aim;
+        public InputAction @PrimaryAttack => m_Wrapper.m_Controls_PrimaryAttack;
+        public InputAction @SecondaryAttack => m_Wrapper.m_Controls_SecondaryAttack;
+        public InputAction @Utility => m_Wrapper.m_Controls_Utility;
+        public InputAction @Special => m_Wrapper.m_Controls_Special;
+        public InputAction @Dash => m_Wrapper.m_Controls_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Controls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -254,6 +424,21 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Aim.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnAim;
+                @PrimaryAttack.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnPrimaryAttack;
+                @PrimaryAttack.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnPrimaryAttack;
+                @PrimaryAttack.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnPrimaryAttack;
+                @SecondaryAttack.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSecondaryAttack;
+                @SecondaryAttack.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSecondaryAttack;
+                @SecondaryAttack.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSecondaryAttack;
+                @Utility.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnUtility;
+                @Utility.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnUtility;
+                @Utility.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnUtility;
+                @Special.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSpecial;
+                @Special.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSpecial;
+                @Special.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSpecial;
+                @Dash.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_ControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -264,6 +449,21 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @PrimaryAttack.started += instance.OnPrimaryAttack;
+                @PrimaryAttack.performed += instance.OnPrimaryAttack;
+                @PrimaryAttack.canceled += instance.OnPrimaryAttack;
+                @SecondaryAttack.started += instance.OnSecondaryAttack;
+                @SecondaryAttack.performed += instance.OnSecondaryAttack;
+                @SecondaryAttack.canceled += instance.OnSecondaryAttack;
+                @Utility.started += instance.OnUtility;
+                @Utility.performed += instance.OnUtility;
+                @Utility.canceled += instance.OnUtility;
+                @Special.started += instance.OnSpecial;
+                @Special.performed += instance.OnSpecial;
+                @Special.canceled += instance.OnSpecial;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -290,5 +490,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnPrimaryAttack(InputAction.CallbackContext context);
+        void OnSecondaryAttack(InputAction.CallbackContext context);
+        void OnUtility(InputAction.CallbackContext context);
+        void OnSpecial(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
