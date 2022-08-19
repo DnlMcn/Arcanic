@@ -24,7 +24,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
-            ""name"": ""Controls"",
+            ""name"": ""Player"",
             ""id"": ""898e873a-3ecd-44f4-9c38-948955995faa"",
             ""actions"": [
                 {
@@ -323,15 +323,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Controls
-        m_Controls = asset.FindActionMap("Controls", throwIfNotFound: true);
-        m_Controls_Movement = m_Controls.FindAction("Movement", throwIfNotFound: true);
-        m_Controls_Aim = m_Controls.FindAction("Aim", throwIfNotFound: true);
-        m_Controls_PrimaryAttack = m_Controls.FindAction("Primary Attack", throwIfNotFound: true);
-        m_Controls_SecondaryAttack = m_Controls.FindAction("Secondary Attack", throwIfNotFound: true);
-        m_Controls_Utility = m_Controls.FindAction("Utility", throwIfNotFound: true);
-        m_Controls_Special = m_Controls.FindAction("Special", throwIfNotFound: true);
-        m_Controls_Dash = m_Controls.FindAction("Dash", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_PrimaryAttack = m_Player.FindAction("Primary Attack", throwIfNotFound: true);
+        m_Player_SecondaryAttack = m_Player.FindAction("Secondary Attack", throwIfNotFound: true);
+        m_Player_Utility = m_Player.FindAction("Utility", throwIfNotFound: true);
+        m_Player_Special = m_Player.FindAction("Special", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -388,59 +388,59 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Controls
-    private readonly InputActionMap m_Controls;
-    private IControlsActions m_ControlsActionsCallbackInterface;
-    private readonly InputAction m_Controls_Movement;
-    private readonly InputAction m_Controls_Aim;
-    private readonly InputAction m_Controls_PrimaryAttack;
-    private readonly InputAction m_Controls_SecondaryAttack;
-    private readonly InputAction m_Controls_Utility;
-    private readonly InputAction m_Controls_Special;
-    private readonly InputAction m_Controls_Dash;
-    public struct ControlsActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private IPlayerActions m_PlayerActionsCallbackInterface;
+    private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_PrimaryAttack;
+    private readonly InputAction m_Player_SecondaryAttack;
+    private readonly InputAction m_Player_Utility;
+    private readonly InputAction m_Player_Special;
+    private readonly InputAction m_Player_Dash;
+    public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
-        public ControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Controls_Movement;
-        public InputAction @Aim => m_Wrapper.m_Controls_Aim;
-        public InputAction @PrimaryAttack => m_Wrapper.m_Controls_PrimaryAttack;
-        public InputAction @SecondaryAttack => m_Wrapper.m_Controls_SecondaryAttack;
-        public InputAction @Utility => m_Wrapper.m_Controls_Utility;
-        public InputAction @Special => m_Wrapper.m_Controls_Special;
-        public InputAction @Dash => m_Wrapper.m_Controls_Dash;
-        public InputActionMap Get() { return m_Wrapper.m_Controls; }
+        public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        public InputAction @PrimaryAttack => m_Wrapper.m_Player_PrimaryAttack;
+        public InputAction @SecondaryAttack => m_Wrapper.m_Player_SecondaryAttack;
+        public InputAction @Utility => m_Wrapper.m_Player_Utility;
+        public InputAction @Special => m_Wrapper.m_Player_Special;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ControlsActions set) { return set.Get(); }
-        public void SetCallbacks(IControlsActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_ControlsActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @Movement.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnMovement;
-                @Aim.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnAim;
-                @Aim.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnAim;
-                @Aim.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnAim;
-                @PrimaryAttack.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnPrimaryAttack;
-                @PrimaryAttack.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnPrimaryAttack;
-                @PrimaryAttack.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnPrimaryAttack;
-                @SecondaryAttack.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSecondaryAttack;
-                @SecondaryAttack.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSecondaryAttack;
-                @SecondaryAttack.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSecondaryAttack;
-                @Utility.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnUtility;
-                @Utility.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnUtility;
-                @Utility.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnUtility;
-                @Special.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSpecial;
-                @Special.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSpecial;
-                @Special.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnSpecial;
-                @Dash.started -= m_Wrapper.m_ControlsActionsCallbackInterface.OnDash;
-                @Dash.performed -= m_Wrapper.m_ControlsActionsCallbackInterface.OnDash;
-                @Dash.canceled -= m_Wrapper.m_ControlsActionsCallbackInterface.OnDash;
+                @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @PrimaryAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryAttack;
+                @PrimaryAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryAttack;
+                @PrimaryAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryAttack;
+                @SecondaryAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryAttack;
+                @SecondaryAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryAttack;
+                @SecondaryAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryAttack;
+                @Utility.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility;
+                @Utility.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility;
+                @Utility.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility;
+                @Special.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
+                @Special.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
+                @Special.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
+                @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
             }
-            m_Wrapper.m_ControlsActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Movement.started += instance.OnMovement;
@@ -467,7 +467,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             }
         }
     }
-    public ControlsActions @Controls => new ControlsActions(this);
+    public PlayerActions @Player => new PlayerActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -486,7 +486,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_KBMSchemeIndex];
         }
     }
-    public interface IControlsActions
+    public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);

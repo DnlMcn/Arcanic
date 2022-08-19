@@ -136,8 +136,8 @@ GameObject:
   - component: {fileID: 2133165}
   - component: {fileID: 2133164}
   - component: {fileID: 2133169}
+  - component: {fileID: 2133170}
   - component: {fileID: 2133168}
-  - component: {fileID: 2133167}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -225,23 +225,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2133162}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2133167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2133162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df05fbdb3e5b6db4ebed2c8a110781f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeed: 8
-  gravitationalForce: -9.81
-  controllerDeadzone: 0.1
-  gamepadRotateSmoothing: 1000
-  isGamepad: 0
 --- !u!114 &2133168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +249,7 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2133167}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TwinStickMovement, Assembly-CSharp
         m_MethodName: OnDeviceChange
         m_Mode: 0
@@ -287,6 +270,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e0a2ea40-4abc-48b3-8b03-f32f090e9b97
     m_ActionName: Controls/Aim[/DualShock4GamepadHID/rightStick,/XInputControllerWindows/rightStick,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8b80bbce-3da5-4a27-8f16-49d36af8693f
+    m_ActionName: Controls/Primary Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 29d35e2a-518d-4992-8f2b-caaa936f189b
+    m_ActionName: Controls/Secondary Attack[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 904fea68-60f1-42b3-a067-52362b7f8446
+    m_ActionName: Controls/Utility[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 60e21fe5-c8aa-4e3a-ba1e-a9ddc6ea53ed
+    m_ActionName: Controls/Special[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 16fe5f49-17c1-48fd-aa68-6f3f881dd221
+    m_ActionName: Controls/Dash[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Controls
@@ -310,6 +313,25 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2133170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df05fbdb3e5b6db4ebed2c8a110781f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 8
+  projectileSpeed: 70
+  gravitationalForce: -9.81
+  controllerDeadzone: 0.1
+  gamepadRotateSmoothing: 1000
+  isGamepad: 0
+  projectile: {fileID: 1765883940861151748, guid: 511ff81cf09b9c54685b42544a178df4, type: 3}
 --- !u!1 &179419484
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +472,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.25, y: 1}
+    m_SensorSize: {x: 1.778098, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -466,14 +488,47 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863716027}
-  m_LocalRotation: {x: 0.44758743, y: 0, z: 0, w: 0.8942402}
+  m_LocalRotation: {x: 0.44758743, y: -0, z: -0, w: 0.8942402}
   m_LocalPosition: {x: 0, y: 16.32, z: -11.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1661804495}
+  m_Father: {fileID: 1002028629}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1002028628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1002028629}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1002028629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002028628}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1293875849}
+  - {fileID: 863716029}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1293875846
 GameObject:
@@ -552,12 +607,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293875846}
-  m_LocalRotation: {x: 0.44758743, y: 0, z: 0, w: 0.8942402}
+  m_LocalRotation: {x: 0.44758743, y: -0, z: -0, w: 0.8942402}
   m_LocalPosition: {x: 0, y: 16.32, z: -11.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1002028629}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1293875850
@@ -600,7 +655,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25012
+  m_Name: pb_Mesh28690
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

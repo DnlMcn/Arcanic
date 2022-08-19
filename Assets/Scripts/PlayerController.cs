@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerInput))]
 
-public class TwinStickMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float playerSpeed = 8f;
     [SerializeField] private float gravitationalForce = -9.81f;
@@ -19,8 +19,14 @@ public class TwinStickMovement : MonoBehaviour
 
     private Vector2 movement;
     private Vector2 aim;
+    private bool primaryAttack;
+    private bool secondaryAttack;
+    private bool utility;
+    private bool special;
 
     private Vector3 playerVelocity;
+
+    public GameObject projectile;
 
     private PlayerControls playerControls;
     private PlayerInput playerInput;
@@ -30,6 +36,8 @@ public class TwinStickMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerControls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
+
+        playerControls.Player.PrimaryAttack.performed += ctx => HandleShooting();
     }
 
     private void OnEnable()
@@ -51,8 +59,8 @@ public class TwinStickMovement : MonoBehaviour
 
     void HandleInput()
     {
-        movement = playerControls.Controls.Movement.ReadValue<Vector2>();
-        aim = playerControls.Controls.Aim.ReadValue<Vector2>();
+        movement = playerControls.Player.Movement.ReadValue<Vector2>();
+        aim = playerControls.Player.Aim.ReadValue<Vector2>();
     }
 
     void HandleMovement()
@@ -92,6 +100,12 @@ public class TwinStickMovement : MonoBehaviour
             }
         }
     
+    }
+
+    void HandleShooting()
+    {
+        Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;
+        Instantiate(projectile, projectileSpawnPoint, transform.rotation);
     }
 
     private void LookAt(Vector3 lookPoint)
