@@ -14,6 +14,7 @@ public class MoxxiProjectile : MonoBehaviour
         transform.Translate(velocity);
 
     }
+    
     private void OnColissionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Equals("Enemy"))

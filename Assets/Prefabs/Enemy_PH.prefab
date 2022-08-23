@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7424540295586704014}
   - component: {fileID: 7004198401674425953}
   m_Layer: 0
-  m_Name: marvado
+  m_Name: Enemy_PH
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
