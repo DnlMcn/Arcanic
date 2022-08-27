@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(2f, 10f)] private float dashScale = 5f; // Number that multiplies the player's speed during a dash
     [SerializeField] [Range(0.01f, 0.5f)] private float dashDuration = 0.2f;
     [SerializeField] [Range(0f, 10f)] private float dashCooldown = 1f;
+    [SerializeField] [Range(0f, 3f)] private float rateOfFire = 0.25f; // Minimum amount of seconds between each shot
 
     [SerializeField] private float gravitationalForce = -9.81f;
     [SerializeField] private float controllerDeadzone = 0.1f;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private bool special;
     private bool dash;
     private bool canDash = true;
+    private bool canShoot = true;
 
     private Vector3 playerVelocity;
 
@@ -111,10 +113,21 @@ public class PlayerController : MonoBehaviour
 
     void HandleShooting()
     {
-        // Read the spawn point of the projectile as the position of the child GameObject
-        Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;
-        // Instantiate the projectile at the spawn point with the player's rotation
-        Instantiate(projectile, projectileSpawnPoint, transform.rotation);
+        if (canShoot)
+        {
+            // Read the spawn point of the projectile as the position of the child GameObject
+            Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;
+            // Instantiate the projectile at the spawn point with the player's rotation
+            Instantiate(projectile, projectileSpawnPoint, transform.rotation);
+            canShoot = false;
+            StartCoroutine(ShootingCooldown());
+        }
+    }
+
+    IEnumerator ShootingCooldown()
+    {
+        yield return new WaitForSeconds(rateOfFire);
+        canShoot = true;
     }
 
     IEnumerator Dash()
@@ -128,7 +141,6 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(dashCooldown);
             canDash = true;
         }
-        
     }
 
     private void LookAt(Vector3 lookPoint)
