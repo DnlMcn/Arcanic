@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b72802e4378a224ba3f58f755b2cee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnRate: 1
   SpawnPoints:
   - {fileID: 527362574}
   - {fileID: 335709011}
@@ -171,7 +172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 54592707}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.023938691, y: -4.395299, z: -0.55719733}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -300,7 +301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335709010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.4, z: 17.15}
+  m_LocalPosition: {x: 0, y: 2, z: 17.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -331,7 +332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483405448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.76, y: 5.89, z: 0}
+  m_LocalPosition: {x: -16.76, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -362,7 +363,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527362573}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.11, y: 7.51, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -415,7 +416,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.778098, y: 1}
+    m_SensorSize: {x: 1.7774566, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -616,7 +617,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386718659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.23, z: -12.1}
+  m_LocalPosition: {x: 0, y: 2, z: -12.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -660,7 +661,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25562
+  m_Name: pb_Mesh25130
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1195,6 +1196,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4416043004979553252, guid: 6b813203f35cece479b3d3b2f950f208, type: 3}
+      propertyPath: rateOfFire
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416043004979553252, guid: 6b813203f35cece479b3d3b2f950f208, type: 3}
+      propertyPath: playerSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4416043004979553254, guid: 6b813203f35cece479b3d3b2f950f208, type: 3}
       propertyPath: m_Camera
       value: 
