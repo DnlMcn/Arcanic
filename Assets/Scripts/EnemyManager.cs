@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] [Range(0.2f, 60f)] private float spawnRate = 1f; // Seconds between each new enemy spawn
 
     public Transform[] SpawnPoints;
     public GameObject EnemyPrefab;
@@ -11,7 +12,16 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnNewEnemy();
+        StartCoroutine(EnemySpawning());
+    }
+
+    IEnumerator EnemySpawning()
+    {
+        while (true)
+        {
+            SpawnNewEnemy();
+            yield return new WaitForSeconds(spawnRate);
+        }
     }
 
     void SpawnNewEnemy() {
