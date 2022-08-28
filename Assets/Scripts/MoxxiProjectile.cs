@@ -27,11 +27,11 @@ public class MoxxiProjectile : MonoBehaviour
     
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag.Equals("Enemy"))
+        if (collider.gameObject.TryGetComponent<Enemy>(out Enemy EnemyComponent));
         {
             Debug.Log("Inimigo atingido.");
             Destroy(transform.gameObject);
-            Destroy(collider.gameObject);
+            EnemyComponent.TakeDamage(1);
         }
     }
 
