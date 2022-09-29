@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,11 +7,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] [Range(2f, 16f)] private float playerSpeed = 8f;
-    [SerializeField] [Range(2f, 10f)] private float dashScale = 5f; // Number that multiplies the player's speed during a dash
-    [SerializeField] [Range(0.01f, 0.5f)] private float dashDuration = 0.2f;
-    [SerializeField] [Range(0f, 10f)] private float dashCooldown = 1f;
-    [SerializeField] [Range(0f, 3f)] private float rateOfFire = 0.25f; // Minimum amount of seconds between each shot
+    [SerializeField] PlayerCharacter character;
+
+    private float movementSpeed;
+    private float dashScale;
+    private float dashDuration;
+    private float dashCooldown;
+    private float rateOfFire;
 
     [SerializeField] private float gravitationalForce = -9.81f;
     [SerializeField] private float controllerDeadzone = 0.1f;
@@ -24,17 +25,10 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 movement;
     private Vector2 aim;
-    private bool primaryAttack;
-    private bool secondaryAttack;
-    private bool utility;
-    private bool special;
-    private bool dash;
     private bool canDash = true;
     private bool canShoot = true;
 
     private Vector3 playerVelocity;
-
-    public GameObject projectile;
 
     private PlayerControls playerControls;
     private PlayerInput playerInput;
@@ -47,6 +41,15 @@ public class PlayerController : MonoBehaviour
 
         playerControls.Player.PrimaryAttack.performed += ctx => HandleShooting();
         playerControls.Player.Dash.performed += ctx => StartCoroutine(Dash());
+    }
+
+    private void Start() 
+    {
+        movementSpeed = character.movementSpeed;
+        dashScale = character.dashScale;
+        dashDuration = character.dashDuration;
+        dashCooldown = character.dashCooldown;
+        rateOfFire = character.primary.rateOfFire;
     }
 
     private void OnEnable()
@@ -75,7 +78,7 @@ public class PlayerController : MonoBehaviour
     void HandleMovement()
     {
         Vector3 move = new Vector3(movement.x, 0, movement.y);
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        controller.Move(move * Time.deltaTime * movementSpeed);
 
         playerVelocity.y += gravitationalForce * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
@@ -118,7 +121,7 @@ public class PlayerController : MonoBehaviour
             // Read the spawn point of the projectile as the position of the child GameObject
             Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;
             // Instantiate the projectile at the spawn point with the player's rotation
-            Instantiate(projectile, projectileSpawnPoint, transform.rotation);
+            Instantiate(character.primary.projectile.prefab, projectileSpawnPoint, transform.rotation);
             canShoot = false;
             StartCoroutine(ShootingCooldown());
         }
@@ -135,9 +138,9 @@ public class PlayerController : MonoBehaviour
         if (canDash)
         {
             canDash = false;
-            playerSpeed *= dashScale;
+            movementSpeed *= dashScale;
             yield return new WaitForSeconds(dashDuration);
-            playerSpeed /= dashScale;
+            movementSpeed /= dashScale;
             yield return new WaitForSeconds(dashCooldown);
             canDash = true;
         }

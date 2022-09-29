@@ -1,16 +1,20 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoxxiProjectile : MonoBehaviour
 {
+    [SerializeField] Projectile projectileType;
 
-    [SerializeField] [Range(20f, 500f)] private float speed = 70f;
-    [SerializeField] private float projectileLifespan = 5f;
+    private float speed;
+    private float lifespan;
+    private float damage;
     private Vector3 velocity;
 
     void Start()
     {
+        speed = projectileType.travelSpeed;
+        lifespan = projectileType.lifespan;
+        damage = projectileType.damage;
         StartCoroutine(ProjectileLifespan());
     }
 
@@ -29,15 +33,14 @@ public class MoxxiProjectile : MonoBehaviour
     {
         if (collider.gameObject.TryGetComponent<Enemy>(out Enemy EnemyComponent))
         {
-            Debug.Log("Inimigo atingido.");
             Destroy(transform.gameObject);
-            EnemyComponent.TakeDamage(1);
+            EnemyComponent.TakeDamage(damage);
         }
     }
 
     IEnumerator ProjectileLifespan()
     {
-        yield return new WaitForSeconds(projectileLifespan);
+        yield return new WaitForSeconds(lifespan);
         Destroy(transform.gameObject);
     }
 }
