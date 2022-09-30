@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6023740a8681e74bbc129c310d320e2, type: 3}
   m_Name: AutoPrimarySO
   m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
-  isAutomatic: 0
-  rateOfFire: 0.25
-  maxAmmo: 5
+  projectile: {fileID: 11400000, guid: 3372a302dc487744ab8e83c8d8682787, type: 2}
+  isAutomatic: 1
+  rateOfFire: 0.08
+  maxAmmo: 30

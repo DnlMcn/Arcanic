@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 11400000, guid: 5a02b2e93c398a841a8b227ea92b0bc8, type: 2}
   isAutomatic: 0
-  rateOfFire: 0.25
+  rateOfFire: 0.5
   maxAmmo: 5

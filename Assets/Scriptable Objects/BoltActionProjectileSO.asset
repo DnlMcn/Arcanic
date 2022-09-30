@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BoltActionProjectileSO
   m_EditorClassIdentifier: 
   prefab: {fileID: 1765883940861151748, guid: 511ff81cf09b9c54685b42544a178df4, type: 3}
-  travelSpeed: 100
+  travelSpeed: 120
   lifespan: 10
-  damage: 5
+  damage: 8
