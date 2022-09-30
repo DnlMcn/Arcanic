@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1925054351707033586}
   - component: {fileID: 6319500666360015630}
-  - component: {fileID: 7610579141406735620}
+  - component: {fileID: -2809282511521434585}
   m_Layer: 0
   m_Name: Bolt-Action Projectile
   m_TagString: Projectile
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileType: {fileID: 11400000, guid: 5a02b2e93c398a841a8b227ea92b0bc8, type: 2}
---- !u!135 &7610579141406735620
-SphereCollider:
+--- !u!136 &-2809282511521434585
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -57,8 +57,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.01
+  m_Radius: 0.05
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3690445536692671935
 GameObject:
