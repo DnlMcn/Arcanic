@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6319500666360015630}
   - component: {fileID: 7610579141406735620}
   m_Layer: 0
-  m_Name: Moxxi Projectile
+  m_Name: Bolt-Action Projectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

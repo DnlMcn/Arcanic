@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     private float dashScale;
     private float dashDuration;
     private float dashCooldown;
-    private float rateOfFire;
 
     [SerializeField] private float gravitationalForce = -9.81f;
     [SerializeField] private float controllerDeadzone = 0.1f;
@@ -26,7 +25,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private Vector2 aim;
     private bool canDash = true;
-    private bool canShoot = true;
 
     private Vector3 playerVelocity;
 
@@ -39,7 +37,6 @@ public class PlayerController : MonoBehaviour
         playerControls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
 
-        playerControls.Player.PrimaryAttack.performed += ctx => HandleShooting();
         playerControls.Player.Dash.performed += ctx => StartCoroutine(Dash());
     }
 
@@ -49,7 +46,6 @@ public class PlayerController : MonoBehaviour
         dashScale = character.dashScale;
         dashDuration = character.dashDuration;
         dashCooldown = character.dashCooldown;
-        rateOfFire = character.primary.rateOfFire;
     }
 
     private void OnEnable()
@@ -111,26 +107,6 @@ public class PlayerController : MonoBehaviour
                 LookAt(point);
             }
         }
-    
-    }
-
-    void HandleShooting()
-    {
-        if (canShoot)
-        {
-            // Read the spawn point of the projectile as the position of the child GameObject
-            Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;
-            // Instantiate the projectile at the spawn point with the player's rotation
-            Instantiate(character.primary.projectile.prefab, projectileSpawnPoint, transform.rotation);
-            canShoot = false;
-            StartCoroutine(ShootingCooldown());
-        }
-    }
-
-    IEnumerator ShootingCooldown()
-    {
-        yield return new WaitForSeconds(rateOfFire);
-        canShoot = true;
     }
 
     IEnumerator Dash()

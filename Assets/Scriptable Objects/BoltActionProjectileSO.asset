@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6023740a8681e74bbc129c310d320e2, type: 3}
-  m_Name: MoxxiPrimarySO
+  m_Script: {fileID: 11500000, guid: f918ec107d9bc52408c5e93721ba0308, type: 3}
+  m_Name: BoltActionProjectileSO
   m_EditorClassIdentifier: 
-  projectile: {fileID: 11400000, guid: 5a02b2e93c398a841a8b227ea92b0bc8, type: 2}
-  rateOfFire: 0.25
-  maxAmmo: 5
+  prefab: {fileID: 1765883940861151748, guid: 511ff81cf09b9c54685b42544a178df4, type: 3}
+  travelSpeed: 100
+  lifespan: 10
+  damage: 5
