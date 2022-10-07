@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84860a245feffd74e94189dc50484cb0, type: 3}
+  m_Name: Enemy1
+  m_EditorClassIdentifier: 
+  enemyName: Bob
+  prefab: {fileID: 2621545610760009568, guid: 81271bbf853ff8c409e9d4e901b5c221, type: 3}
+  maxHealth: 10
+  movementSpeed: 8
+  attack1: {fileID: 11400000, guid: b847bf19bd0bd414c9e3c926f973d22e, type: 2}
+  attack2: {fileID: 0}

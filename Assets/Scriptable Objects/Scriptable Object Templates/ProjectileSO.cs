@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Projectile", menuName = "Scriptable Objects/Projectile")]
-public class Projectile : ScriptableObject
+public class ProjectileSO : ScriptableObject
 {
     public GameObject prefab;
     

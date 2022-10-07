@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f918ec107d9bc52408c5e93721ba0308, type: 3}
-  m_Name: AutoProjectile SO
+  m_Name: AutoProjectileSO
   m_EditorClassIdentifier: 
   prefab: {fileID: 1765883940861151748, guid: f83ace550849bc445b76d91de60ca750, type: 3}
   travelSpeed: 80

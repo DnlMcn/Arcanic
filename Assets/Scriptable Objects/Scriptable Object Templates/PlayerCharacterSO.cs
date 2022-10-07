@@ -1,11 +1,11 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Player Character", menuName = "Scriptable Objects/Player Character")]
-public class PlayerCharacter : ScriptableObject
+public class PlayerCharacterSO : ScriptableObject
 {
     public string characterName;
 
-    public PrimaryAttack primary;
+    public PrimaryAttackSO primary;
 
     [Range(1, 1000)]
     public int maxHealth = 100;

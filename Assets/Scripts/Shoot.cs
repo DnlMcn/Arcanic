@@ -16,7 +16,7 @@ using UnityEngine.InputSystem;
 
 public class Shoot : MonoBehaviour
 {
-    [SerializeField] PlayerCharacter character;
+    [SerializeField] PlayerCharacterSO character;
 
     private float rateOfFire;
     private bool isAuto;

@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class MoxxiProjectile : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
-    [SerializeField] Projectile projectileType;
+    [SerializeField] ProjectileSO projectileType;
 
     private float speed;
     private float lifespan;
@@ -31,10 +31,10 @@ public class MoxxiProjectile : MonoBehaviour
     
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.TryGetComponent<Enemy>(out Enemy EnemyComponent))
+        if (collider.gameObject.TryGetComponent<BasicEnemy>(out BasicEnemy enemyComponent))
         {
             Destroy(transform.gameObject);
-            EnemyComponent.TakeDamage(damage);
+            enemyComponent.TakeDamage(damage);
         }
     }
 

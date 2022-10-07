@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] PlayerCharacter character;
+    [SerializeField] PlayerCharacterSO character;
 
     private float movementSpeed;
     private float dashScale;
