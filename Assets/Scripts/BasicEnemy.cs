@@ -5,6 +5,7 @@ using UnityEngine;
 public class BasicEnemy : MonoBehaviour
 {
     public EnemySO enemyType;
+    public GameEvent onReceiveDamage;
 
     float maxHealth, health;
     float speed;
@@ -16,13 +17,19 @@ public class BasicEnemy : MonoBehaviour
         speed = enemyType.movementSpeed;
     }
 
-   public void TakeDamage(float damageAmount)
+    public void TakeDamage(float damageAmount)
     {
+        onReceiveDamage.Raise();
         health -= damageAmount;
 
         if (health <= 0)
         {
             Destroy(gameObject);
         }
+    }
+
+    public void LogDamage()
+    {
+        Debug.Log("Enemy hit.");
     }
 }
