@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private Vector2 aim;
     private bool canDash = true;
+    private bool isAirborne = false;
 
     private Vector3 playerVelocity;
 
@@ -76,7 +77,8 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         controller.Move(move * Time.deltaTime * movementSpeed);
 
-        playerVelocity.y += gravitationalForce * Time.deltaTime;
+        if (isAirborne) playerVelocity.y += gravitationalForce * Time.deltaTime;
+
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
@@ -98,7 +100,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Ray ray = Camera.main.ScreenPointToRay(aim);
-            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+            Plane groundPlane = new Plane(Vector3.up, transform.position);
             float rayDistance;
 
             if (groundPlane.Raycast(ray, out rayDistance))

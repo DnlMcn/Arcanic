@@ -6,12 +6,14 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 
 
-//  Explanation of the "Automatic" function of this script:
+//  Explicação da função de "Automatic" nesse script:
 //
-//  Whenever the primary attack input is performed, the "Fire" method checks if "isAuto" is set to true. 
-//  If so, the variable "isShooting" is set to true. 
-//  If the player cancels the shooting action (by releasing LMB), "isShooting" is set to false.
-//  If "isShooting" is set to true, the "Fire" method tries to be called in the "Update" method.
+//  Quando a ação de ataque é feita,o método de disparo checa se a arma sendo utilizada é automática. 
+//  Se ela for, uma variável que armazena se o jogador está atirando passa a ser verdadeira.
+//  Se o jogador cancelar a ação de ataque (soltando o botão esquerdo do mouse), a variavel passa a ser falsa.
+//  Desde que a variável seja verdadeira, o método de disparo é chamado.
+//
+//  Isso difere da arma semi-automática, que só dispara assim que jogador faz a ação de ataque (caso seja possível).
 
 
 public class Shoot : MonoBehaviour
@@ -47,11 +49,6 @@ public class Shoot : MonoBehaviour
         playerControls.Player.PrimaryAttack.canceled += ctx => CancelFire();
     }
 
-    private void Update()
-    {
-        if (isShooting && canShoot) Fire();
-    }
-
     private void OnEnable()
     {
         playerControls.Enable();
@@ -67,9 +64,7 @@ public class Shoot : MonoBehaviour
         if (canShoot)
         {
             if (isAuto) isShooting = true;
-            // Read the spawn point of the projectile as the position of the child GameObject
             Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;
-            // Instantiate the projectile at the spawn point with the player's rotation
             Instantiate(character.primary.projectile.prefab, projectileSpawnPoint, transform.rotation);
             canShoot = false;
             StartCoroutine(ShootingCooldown());
@@ -85,6 +80,7 @@ public class Shoot : MonoBehaviour
     {
         yield return new WaitForSeconds(rateOfFire);
         canShoot = true;
+        if (isShooting) Fire();
     }
 
     public void OnDeviceChange(PlayerInput pi)
