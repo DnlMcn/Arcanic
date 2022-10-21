@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1925054351707033586}
   - component: {fileID: 6319500666360015630}
-  - component: {fileID: 3445707310041312555}
   m_Layer: 0
-  m_Name: Auto Projectile
+  m_Name: Bolt-Action Projectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1765883940861151748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9, y: 9, z: 9}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7612623625816984952}
@@ -46,24 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0519ee4d95d8b44a810a69d343d367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileType: {fileID: 11400000, guid: 3372a302dc487744ab8e83c8d8682787, type: 2}
+  projectileType: {fileID: 11400000, guid: 5a02b2e93c398a841a8b227ea92b0bc8, type: 2}
   mask:
     serializedVersion: 2
     m_Bits: 8
---- !u!136 &3445707310041312555
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1765883940861151748}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.05
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3690445536692671935
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +77,7 @@ Transform:
   m_GameObject: {fileID: 3690445536692671935}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.06481087, y: 0.061721984, z: 0.07747601}
+  m_LocalScale: {x: 0.05634258, y: 0.05634258, z: 0.14118323}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1925054351707033586}
