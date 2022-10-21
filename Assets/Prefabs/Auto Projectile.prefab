@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileType: {fileID: 11400000, guid: 3372a302dc487744ab8e83c8d8682787, type: 2}
+  mask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!136 &3445707310041312555
 CapsuleCollider:
   m_ObjectHideFlags: 0
