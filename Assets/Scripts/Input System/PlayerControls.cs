@@ -64,15 +64,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Utility"",
-                    ""type"": ""Button"",
-                    ""id"": ""904fea68-60f1-42b3-a067-52362b7f8446"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Special"",
                     ""type"": ""Button"",
                     ""id"": ""60e21fe5-c8aa-4e3a-ba1e-a9ddc6ea53ed"",
@@ -94,6 +85,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": ""Switch Primary"",
                     ""type"": ""Button"",
                     ""id"": ""e6023123-20e9-40c9-b40c-1be2ddec9d49"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""8bb56969-842e-4202-b0df-7cb7866e202f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -236,7 +236,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""78bf6b09-1c1f-4cf6-a5a7-05fc7fd7f023"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
@@ -247,7 +247,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a37f1189-054d-45fb-9b21-b8b484675dad"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -279,28 +279,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""18a77227-3813-480f-8f05-1c510ef15042"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KBM"",
-                    ""action"": ""Utility"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""20e995cc-c4a3-4cf9-929c-27d1d63bb586"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Utility"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""9be123a3-c7d2-4ebf-9500-71474ecb7d42"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
@@ -318,6 +296,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Switch Primary"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0596ed3d-723a-421c-87f4-255bb5471a1f"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be96f4f1-13c6-466c-950a-5ac3637ee9e2"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -360,10 +360,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_PrimaryAttack = m_Player.FindAction("Primary Attack", throwIfNotFound: true);
         m_Player_SecondaryAttack = m_Player.FindAction("Secondary Attack", throwIfNotFound: true);
-        m_Player_Utility = m_Player.FindAction("Utility", throwIfNotFound: true);
         m_Player_Special = m_Player.FindAction("Special", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_SwitchPrimary = m_Player.FindAction("Switch Primary", throwIfNotFound: true);
+        m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -427,10 +427,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_PrimaryAttack;
     private readonly InputAction m_Player_SecondaryAttack;
-    private readonly InputAction m_Player_Utility;
     private readonly InputAction m_Player_Special;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_SwitchPrimary;
+    private readonly InputAction m_Player_Reload;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -439,10 +439,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @PrimaryAttack => m_Wrapper.m_Player_PrimaryAttack;
         public InputAction @SecondaryAttack => m_Wrapper.m_Player_SecondaryAttack;
-        public InputAction @Utility => m_Wrapper.m_Player_Utility;
         public InputAction @Special => m_Wrapper.m_Player_Special;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @SwitchPrimary => m_Wrapper.m_Player_SwitchPrimary;
+        public InputAction @Reload => m_Wrapper.m_Player_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -464,9 +464,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SecondaryAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryAttack;
                 @SecondaryAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryAttack;
                 @SecondaryAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondaryAttack;
-                @Utility.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility;
-                @Utility.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility;
-                @Utility.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUtility;
                 @Special.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
                 @Special.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
                 @Special.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
@@ -476,6 +473,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SwitchPrimary.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchPrimary;
                 @SwitchPrimary.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchPrimary;
                 @SwitchPrimary.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchPrimary;
+                @Reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -492,9 +492,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SecondaryAttack.started += instance.OnSecondaryAttack;
                 @SecondaryAttack.performed += instance.OnSecondaryAttack;
                 @SecondaryAttack.canceled += instance.OnSecondaryAttack;
-                @Utility.started += instance.OnUtility;
-                @Utility.performed += instance.OnUtility;
-                @Utility.canceled += instance.OnUtility;
                 @Special.started += instance.OnSpecial;
                 @Special.performed += instance.OnSpecial;
                 @Special.canceled += instance.OnSpecial;
@@ -504,6 +501,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SwitchPrimary.started += instance.OnSwitchPrimary;
                 @SwitchPrimary.performed += instance.OnSwitchPrimary;
                 @SwitchPrimary.canceled += instance.OnSwitchPrimary;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -532,9 +532,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnPrimaryAttack(InputAction.CallbackContext context);
         void OnSecondaryAttack(InputAction.CallbackContext context);
-        void OnUtility(InputAction.CallbackContext context);
         void OnSpecial(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnSwitchPrimary(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }

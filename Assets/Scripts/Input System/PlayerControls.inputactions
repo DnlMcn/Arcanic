@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Utility",
-                    "type": "Button",
-                    "id": "904fea68-60f1-42b3-a067-52362b7f8446",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Special",
                     "type": "Button",
                     "id": "60e21fe5-c8aa-4e3a-ba1e-a9ddc6ea53ed",
@@ -72,6 +63,15 @@
                     "name": "Switch Primary",
                     "type": "Button",
                     "id": "e6023123-20e9-40c9-b40c-1be2ddec9d49",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "8bb56969-842e-4202-b0df-7cb7866e202f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -214,7 +214,7 @@
                 {
                     "name": "",
                     "id": "78bf6b09-1c1f-4cf6-a5a7-05fc7fd7f023",
-                    "path": "<Keyboard>/q",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
@@ -225,7 +225,7 @@
                 {
                     "name": "",
                     "id": "a37f1189-054d-45fb-9b21-b8b484675dad",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -257,28 +257,6 @@
                 },
                 {
                     "name": "",
-                    "id": "18a77227-3813-480f-8f05-1c510ef15042",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KBM",
-                    "action": "Utility",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "20e995cc-c4a3-4cf9-929c-27d1d63bb586",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Utility",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "9be123a3-c7d2-4ebf-9500-71474ecb7d42",
                     "path": "<Keyboard>/q",
                     "interactions": "",
@@ -296,6 +274,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Switch Primary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0596ed3d-723a-421c-87f4-255bb5471a1f",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KBM",
+                    "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be96f4f1-13c6-466c-950a-5ac3637ee9e2",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

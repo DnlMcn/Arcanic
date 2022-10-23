@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
         StartCoroutine(ProjectileLifespan());
     }
 
-    private void Update() 
+    private void FixedUpdate() 
     {
         lastFramePosition = transform.position;
         Move();

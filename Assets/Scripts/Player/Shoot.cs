@@ -24,12 +24,16 @@ public class Shoot : MonoBehaviour
     [SerializeField] private int primaryNumber = 1;
     private float rateOfFire;
     private bool isAuto;
+    private bool infiniteAmmo;
+    private int maxAmmo;
+    private int ammo;
 
     [SerializeField] private bool isGamepad;
 
     private CharacterController controller;
 
     private bool canShoot = true;
+    private bool hasAmmo = true;
     private bool isShooting = false;
 
     private PlayerControls playerControls;
@@ -47,30 +51,39 @@ public class Shoot : MonoBehaviour
         selectedPrimary = character.SelectActivePrimary(primaryNumber);
         rateOfFire = 60 / selectedPrimary.rpm;
         isAuto = selectedPrimary.isAutomatic;
+        infiniteAmmo = selectedPrimary.infiniteAmmo;
+        maxAmmo = selectedPrimary.maxAmmo;
+        ammo = maxAmmo;
         selectedPrimary.LogMaxDPS();
         
         playerControls.Player.PrimaryAttack.performed += ctx => Fire();
         playerControls.Player.PrimaryAttack.canceled += ctx => CancelFire();
         playerControls.Player.SwitchPrimary.performed += ctx => SwitchPrimary();
+        playerControls.Player.Reload.performed += ctx => Reload();
+        playerControls.Player.Dash.performed += ctx => Reload();
     }
 
     private void SwitchPrimary()
     {
         primaryNumber = (primaryNumber == 1 ? 2 : 1); // Retorna 2 se primaryNumber for 1. Retorna 1 se primaryNumber for 2.
+        
         selectedPrimary = character.SelectActivePrimary(primaryNumber);
-
         rateOfFire = 60 / selectedPrimary.rpm;
         isAuto = selectedPrimary.isAutomatic;
+        infiniteAmmo = selectedPrimary.infiniteAmmo;
+        maxAmmo = selectedPrimary.maxAmmo;
+        ammo = maxAmmo;
         selectedPrimary.LogMaxDPS();
     }
 
     void Fire()
     {
-        if (canShoot)
+        if (canShoot && hasAmmo)
         {
             if (isAuto) isShooting = true;
             Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;
             Instantiate(selectedPrimary.projectile.prefab, projectileSpawnPoint, transform.rotation);
+            if (!infiniteAmmo) SubtractAmmo();
             canShoot = false;
             StartCoroutine(ShootingCooldown());
         }
@@ -79,6 +92,24 @@ public class Shoot : MonoBehaviour
     void CancelFire()
     {
         isShooting = false;
+    }
+
+    void SubtractAmmo()
+    {
+        ammo -= 1;
+        if (ammo <= 0) hasAmmo = false;
+    }
+
+    void Reload()
+    {
+        StartCoroutine(ReloadCooldown());
+    }
+
+    IEnumerator ReloadCooldown()
+    {
+        yield return new WaitForSeconds(selectedPrimary.reloadTime);
+        ammo = maxAmmo;
+        hasAmmo = true;
     }
 
     IEnumerator ShootingCooldown()
