@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Switch Primary",
+                    "type": "Button",
+                    "id": "e6023123-20e9-40c9-b40c-1be2ddec9d49",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -172,7 +181,7 @@
                 {
                     "name": "",
                     "id": "1c77cf4d-62f1-41d7-9264-0670c306ee20",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -194,7 +203,7 @@
                 {
                     "name": "",
                     "id": "87d72cb0-5251-48f7-8c65-8f28f6ef97c7",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -265,6 +274,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Utility",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9be123a3-c7d2-4ebf-9500-71474ecb7d42",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KBM",
+                    "action": "Switch Primary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "57600f38-d672-4a67-a354-ea567a13dd73",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Switch Primary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

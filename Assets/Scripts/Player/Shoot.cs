@@ -19,7 +19,9 @@ using UnityEngine.InputSystem;
 public class Shoot : MonoBehaviour
 {
     [SerializeField] PlayerCharacterSO character;
+    private PrimaryAttackSO selectedPrimary;
 
+    [SerializeField] private int primaryNumber = 1;
     private float rateOfFire;
     private bool isAuto;
 
@@ -42,21 +44,24 @@ public class Shoot : MonoBehaviour
 
     private void Start() 
     {
-        rateOfFire = character.primary.rateOfFire;
-        isAuto = character.primary.isAutomatic;
+        selectedPrimary = character.SelectActivePrimary(primaryNumber);
+        rateOfFire = 60 / selectedPrimary.rpm;
+        isAuto = selectedPrimary.isAutomatic;
+        selectedPrimary.LogMaxDPS();
         
         playerControls.Player.PrimaryAttack.performed += ctx => Fire();
         playerControls.Player.PrimaryAttack.canceled += ctx => CancelFire();
+        playerControls.Player.SwitchPrimary.performed += ctx => SwitchPrimary();
     }
 
-    private void OnEnable()
+    private void SwitchPrimary()
     {
-        playerControls.Enable();
-    }
+        primaryNumber = (primaryNumber == 1 ? 2 : 1); // Retorna 2 se primaryNumber for 1. Retorna 1 se primaryNumber for 2.
+        selectedPrimary = character.SelectActivePrimary(primaryNumber);
 
-    private void OnDisable()
-    {
-        playerControls.Disable();
+        rateOfFire = 60 / selectedPrimary.rpm;
+        isAuto = selectedPrimary.isAutomatic;
+        selectedPrimary.LogMaxDPS();
     }
 
     void Fire()
@@ -65,7 +70,7 @@ public class Shoot : MonoBehaviour
         {
             if (isAuto) isShooting = true;
             Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;
-            Instantiate(character.primary.projectile.prefab, projectileSpawnPoint, transform.rotation);
+            Instantiate(selectedPrimary.projectile.prefab, projectileSpawnPoint, transform.rotation);
             canShoot = false;
             StartCoroutine(ShootingCooldown());
         }
@@ -81,6 +86,17 @@ public class Shoot : MonoBehaviour
         yield return new WaitForSeconds(rateOfFire);
         canShoot = true;
         if (isShooting) Fire();
+    }
+
+
+    private void OnEnable()
+    {
+        playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
     }
 
     public void OnDeviceChange(PlayerInput pi)

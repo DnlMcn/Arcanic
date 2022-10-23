@@ -5,7 +5,21 @@ public class PlayerCharacterSO : ScriptableObject
 {
     public string characterName;
 
-    public PrimaryAttackSO primary;
+    public PrimaryAttackSO activePrimary;
+    PrimaryAttackSO primary1;
+    PrimaryAttackSO primary2;
+
+    public PrimaryAttackSO SelectActivePrimary(int primary)
+    {
+        switch (primary)
+        {
+            case 1:
+                return primary1;
+            case 2:
+                return primary2;
+        }
+        return primary1;
+    }
 
     [Range(1, 1000)]
     public int maxHealth = 100;

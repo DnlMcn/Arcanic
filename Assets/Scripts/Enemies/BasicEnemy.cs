@@ -30,7 +30,7 @@ public class BasicEnemy : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        onReceiveDamage.Raise();
+        // onReceiveDamage.Raise();
         health -= damageAmount;
 
         if (health <= 0)

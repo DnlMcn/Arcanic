@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MoxxiSO
   m_EditorClassIdentifier: 
   characterName: Moxxi
-  primary: {fileID: 11400000, guid: 705dbd9f902567c4fbf9fab1507250d1, type: 2}
+  activePrimary: {fileID: 0}
   maxHealth: 100
   regen: 5
   movementSpeed: 8
