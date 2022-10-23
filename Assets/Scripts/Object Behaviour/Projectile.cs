@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     private float speed;
     private float lifespan;
     private float damage;
+    private bool piercing;
 
     private Vector3 velocity;
     private Vector3 lastFramePosition;
@@ -19,10 +20,12 @@ public class Projectile : MonoBehaviour
         speed = projectileType.travelSpeed;
         lifespan = projectileType.lifespan;
         damage = projectileType.damage;
+        piercing = projectileType.piercing;
+
         StartCoroutine(ProjectileLifespan());
     }
 
-    private void FixedUpdate() 
+    private void Update() 
     {
         lastFramePosition = transform.position;
         Move();
@@ -31,20 +34,26 @@ public class Projectile : MonoBehaviour
 
     private void DetectRayCollision()
     {
+        /*
+        Esse método projeta um raio entre a posição atual e a posição do projétil no último frame para detectar colisões.
+        Isso previne que colisões não sejam detectadas quando o projétil se move rápido o suficiente para atravessar
+        objetos entre frames.
+        */
+        
         Ray ray = new Ray(lastFramePosition, transform.forward);
-        RaycastHit hitInfo;
+        RaycastHit hitInfo;        
 
         float lastToCurrentFrameDistace = Vector3.Distance(lastFramePosition, transform.position);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * lastToCurrentFrameDistace, Color.red);
+
         if (Physics.Raycast(ray, out hitInfo, lastToCurrentFrameDistace, mask))
         {
             if (hitInfo.collider.gameObject.TryGetComponent<BasicEnemy>(out BasicEnemy enemyComponent))
             {
-                if (!projectileType.piercing) Destroy(transform.gameObject);
+                if (!piercing) Destroy(transform.gameObject);
                 enemyComponent.TakeDamage(damage);
             }
         }
-
-        Debug.DrawLine(ray.origin, ray.origin + ray.direction * lastToCurrentFrameDistace, Color.red);
     }
 
     void Move()

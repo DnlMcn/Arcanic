@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerCharacterSO character;
 
+    public static Vector3 position;
+
     private float movementSpeed;
     private float dashScale;
     private float dashDuration;
@@ -64,6 +66,8 @@ public class PlayerController : MonoBehaviour
         HandleInput();
         HandleMovement();
         HandleRotation();
+
+        position = transform.position;
     }
 
     void HandleInput()

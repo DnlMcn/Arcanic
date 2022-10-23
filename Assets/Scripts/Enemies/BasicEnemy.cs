@@ -17,6 +17,17 @@ public class BasicEnemy : MonoBehaviour
         speed = enemyType.movementSpeed;
     }
 
+    void Update() 
+    {
+        ChasePlayer();
+    }
+
+    void ChasePlayer()
+    {
+        transform.LookAt(PlayerController.position);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
+
     public void TakeDamage(float damageAmount)
     {
         onReceiveDamage.Raise();

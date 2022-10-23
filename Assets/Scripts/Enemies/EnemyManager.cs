@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] [Range(0.2f, 60f)] private float spawnRate = 4f; // Seconds between each new enemy spawn
+    [SerializeField] [Range(0.2f, 60f)] private float spawnRate = 5f;
 
     public Transform[] SpawnPoints;
     public GameObject EnemyPrefab;
