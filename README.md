@@ -11,11 +11,17 @@ Membros: Danilo Mancini, Diogo de Azevedo, Eduardo Dias, Felix Hioki, Gustavo Go
 [*GDD*](https://docs.google.com/document/d/1ecWXxq0F2T6H8f7QlhAJWdVMxCd3cVlwd0Wg-ISU3Ng/edit?usp=sharing)
 
 Danilo Mancini: Programação e Direção de Game Design
+
 Diogo de Azevedo: Programação e Assistência de Game Design
+
 Felix Hioki: Direção de Arte, Modelação e Assistência de Game Design
+
 Eduardo Dias: Assistência de Arte e Assistência de Game Design
+
 Gustavo Gomes: Assistência de Arte e Assistência de Game Design
+
 Maria Eduarda: Assistência de Arte, Redes Sociais e Assistência Geral
+
 Mateus Sena: Assistência Criativa, Assistência Geral
 
 
