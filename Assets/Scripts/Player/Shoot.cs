@@ -25,8 +25,10 @@ public class Shoot : MonoBehaviour
     private float rateOfFire;
     private bool isAuto;
     private bool infiniteAmmo;
-    private int maxAmmo;
-    private int ammo;
+    public int maxAmmo;
+    public int ammo;
+
+    public GameEvent OnFire;
 
     [SerializeField] private bool isGamepad;
 
@@ -35,6 +37,7 @@ public class Shoot : MonoBehaviour
     private bool canShoot = true;
     private bool hasAmmo = true;
     private bool isShooting = false;
+    private bool isReloading = false;
 
     private PlayerControls playerControls;
     private PlayerInput playerInput;
@@ -60,13 +63,17 @@ public class Shoot : MonoBehaviour
         playerControls.Player.PrimaryAttack.canceled += ctx => CancelFire();
         playerControls.Player.SwitchPrimary.performed += ctx => SwitchPrimary();
         playerControls.Player.Reload.performed += ctx => Reload();
-        playerControls.Player.Dash.performed += ctx => Reload();
+    }
+
+    void Update()
+    {
+        LogContinuous();
     }
 
     private void SwitchPrimary()
     {
         primaryNumber = (primaryNumber == 1 ? 2 : 1); // Retorna 2 se primaryNumber for 1. Retorna 1 se primaryNumber for 2.
-        
+
         selectedPrimary = character.SelectActivePrimary(primaryNumber);
         rateOfFire = 60 / selectedPrimary.rpm;
         isAuto = selectedPrimary.isAutomatic;
@@ -78,7 +85,7 @@ public class Shoot : MonoBehaviour
 
     void Fire()
     {
-        if (canShoot && hasAmmo)
+        if (canShoot && hasAmmo && !isReloading)
         {
             if (isAuto) isShooting = true;
             Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;
@@ -86,6 +93,8 @@ public class Shoot : MonoBehaviour
             if (!infiniteAmmo) SubtractAmmo();
             canShoot = false;
             StartCoroutine(ShootingCooldown());
+
+            OnFire.Raise();
         }
     }
 
@@ -102,12 +111,18 @@ public class Shoot : MonoBehaviour
 
     void Reload()
     {
-        StartCoroutine(ReloadCooldown());
+        if (!isReloading && ammo != maxAmmo)
+        {
+            isReloading = true;
+            ammo = 0;
+            StartCoroutine(ReloadCooldown());
+        }
     }
 
     IEnumerator ReloadCooldown()
     {
         yield return new WaitForSeconds(selectedPrimary.reloadTime);
+        isReloading = false;
         ammo = maxAmmo;
         hasAmmo = true;
     }
@@ -133,5 +148,13 @@ public class Shoot : MonoBehaviour
     public void OnDeviceChange(PlayerInput pi)
     {
         isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
+    }
+
+    void LogContinuous()
+    {
+        Debug.Log("Pode atirar? " + canShoot);
+        Debug.Log("Está atirando? " + isShooting);
+        Debug.Log("Está recarregando?" + isReloading);
+        Debug.Log("Tem munição?" + hasAmmo);
     }
 }

@@ -17,4 +17,4 @@ MonoBehaviour:
   rpm: 90
   infiniteAmmo: 0
   maxAmmo: 5
-  reloadTime: 2
+  reloadTime: 1
