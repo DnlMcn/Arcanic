@@ -28,8 +28,6 @@ public class Shoot : MonoBehaviour
     [HideInInspector] public int maxAmmo;
     [HideInInspector] public int ammo;
 
-    public GameEvent OnFire;
-
     [SerializeField] private bool isGamepad;
 
     private CharacterController controller;
@@ -94,8 +92,6 @@ public class Shoot : MonoBehaviour
             if (!infiniteAmmo) SubtractAmmo();
             canShoot = false;
             StartCoroutine(ShootingCooldown());
-
-            OnFire.Raise();
         }
     }
 
