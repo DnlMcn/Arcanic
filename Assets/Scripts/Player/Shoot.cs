@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 //  Explicação da função de "Automatic" nesse script:
 //
-//  Quando a ação de ataque é feita,o método de disparo checa se a arma sendo utilizada é automática. 
+//  Quando a ação de ataque é feita, o método de disparo checa se a arma sendo utilizada é automática. 
 //  Se ela for, uma variável que armazena se o jogador está atirando passa a ser verdadeira.
 //  Se o jogador cancelar a ação de ataque (soltando o botão esquerdo do mouse), a variavel passa a ser falsa.
 //  Desde que a variável seja verdadeira, o método de disparo é chamado.
@@ -19,14 +19,14 @@ using UnityEngine.InputSystem;
 public class Shoot : MonoBehaviour
 {
     [SerializeField] PlayerCharacterSO character;
-    private PrimaryAttackSO selectedPrimary;
+    [SerializeField] PrimaryAttackSO selectedPrimary;
 
-    [SerializeField] private int primaryNumber = 1;
-    private float rateOfFire;
-    private bool isAuto;
-    private bool infiniteAmmo;
-    public int maxAmmo;
-    public int ammo;
+    [SerializeField] int primaryNumber = 1;
+    float rateOfFire;
+    bool isAuto;
+    [HideInInspector] public bool infiniteAmmo;
+    [HideInInspector] public int maxAmmo;
+    [HideInInspector] public int ammo;
 
     public GameEvent OnFire;
 
@@ -42,21 +42,23 @@ public class Shoot : MonoBehaviour
     private PlayerControls playerControls;
     private PlayerInput playerInput;
 
-    private void Awake()
+    void Awake()
     {
         controller = GetComponent<CharacterController>();
         playerControls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
     }
 
-    private void Start() 
+    void Start() 
     {
         selectedPrimary = character.SelectActivePrimary(primaryNumber);
+        Debug.Log(selectedPrimary);
         rateOfFire = 60 / selectedPrimary.rpm;
+        Debug.Log(rateOfFire);
         isAuto = selectedPrimary.isAutomatic;
         infiniteAmmo = selectedPrimary.infiniteAmmo;
-        maxAmmo = selectedPrimary.maxAmmo;
-        ammo = maxAmmo;
+        ammo = maxAmmo = selectedPrimary.maxAmmo;
+        
         selectedPrimary.LogMaxDPS();
         
         playerControls.Player.PrimaryAttack.performed += ctx => Fire();
@@ -78,14 +80,13 @@ public class Shoot : MonoBehaviour
         rateOfFire = 60 / selectedPrimary.rpm;
         isAuto = selectedPrimary.isAutomatic;
         infiniteAmmo = selectedPrimary.infiniteAmmo;
-        maxAmmo = selectedPrimary.maxAmmo;
-        ammo = maxAmmo;
+        ammo = maxAmmo = selectedPrimary.maxAmmo;
         selectedPrimary.LogMaxDPS();
     }
 
     void Fire()
     {
-        if (canShoot && hasAmmo && !isReloading)
+        if (canShoot && ammo > 0 && !isReloading)
         {
             if (isAuto) isShooting = true;
             Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;
@@ -106,7 +107,6 @@ public class Shoot : MonoBehaviour
     void SubtractAmmo()
     {
         ammo -= 1;
-        if (ammo <= 0) hasAmmo = false;
     }
 
     void Reload()
@@ -124,7 +124,6 @@ public class Shoot : MonoBehaviour
         yield return new WaitForSeconds(selectedPrimary.reloadTime);
         isReloading = false;
         ammo = maxAmmo;
-        hasAmmo = true;
     }
 
     IEnumerator ShootingCooldown()

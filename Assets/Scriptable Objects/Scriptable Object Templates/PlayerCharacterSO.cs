@@ -6,8 +6,8 @@ public class PlayerCharacterSO : ScriptableObject
     public string characterName;
 
     public PrimaryAttackSO activePrimary;
-    PrimaryAttackSO primary1;
-    PrimaryAttackSO primary2;
+    [SerializeField] PrimaryAttackSO primary1;
+    [SerializeField] PrimaryAttackSO primary2;
 
     public PrimaryAttackSO SelectActivePrimary(int primary)
     {

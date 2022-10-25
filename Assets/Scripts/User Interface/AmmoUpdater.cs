@@ -13,9 +13,17 @@ public class AmmoUpdater : MonoBehaviour
 
     public void UpdateAmmoDisplay()
     {
-        int maxAmmo = player.GetComponent<Shoot>().maxAmmo;
-        int ammo = player.GetComponent<Shoot>().ammo;
+        bool infiniteAmmo = player.GetComponent<Shoot>().infiniteAmmo;
+        if (infiniteAmmo)
+        {
+            this.GetComponent<TMPro.TextMeshProUGUI>().text = "∞ / ∞";
+        }
+        else
+        {
+            int maxAmmo = player.GetComponent<Shoot>().maxAmmo;
+            int ammo = player.GetComponent<Shoot>().ammo;
         
-        this.GetComponent<TMPro.TextMeshProUGUI>().text = ammo + " / " + maxAmmo;
+            this.GetComponent<TMPro.TextMeshProUGUI>().text = ammo + " / " + maxAmmo;
+        }
     }
 }
