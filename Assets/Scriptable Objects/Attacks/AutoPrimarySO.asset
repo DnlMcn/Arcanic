@@ -15,6 +15,6 @@ MonoBehaviour:
   projectile: {fileID: 11400000, guid: 3372a302dc487744ab8e83c8d8682787, type: 2}
   isAutomatic: 1
   rpm: 1250
-  infiniteAmmo: 1
+  infiniteAmmo: 0
   maxAmmo: 40
   reloadTime: 0.8
