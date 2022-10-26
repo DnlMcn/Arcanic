@@ -22,13 +22,14 @@ public class PlayerCharacterSO : ScriptableObject
     }
 
     [Range(1, 1000)]
-    public int maxHealth = 100;
+    public float maxHealth = 100;
 
     [Range(0, 25)]
-    public int regen = 5;
+    public float regen = 5;
 
     [Range(4f, 20f)]
     public float movementSpeed = 8;
+
 
     [Range(1f, 50f)]
     public float dashScale = 5;

@@ -7,7 +7,7 @@ public class EnemySO : ScriptableObject
     public GameObject prefab;
 
     [Range(1f, 10000f)]
-    public int maxHealth;
+    public float maxHealth;
 
     [Range(1f, 100f)]
     public float movementSpeed;

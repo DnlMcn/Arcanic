@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f918ec107d9bc52408c5e93721ba0308, type: 3}
-  m_Name: BoltActionProjectileSO
+  m_Script: {fileID: 11500000, guid: a66049c64a8a47b4dac4715c297db4f4, type: 3}
+  m_Name: DynabearSO
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1765883940861151748, guid: 511ff81cf09b9c54685b42544a178df4, type: 3}
-  travelSpeed: 250
-  lifespan: 3
-  damage: 35
-  piercing: 2

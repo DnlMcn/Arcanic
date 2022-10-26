@@ -6,7 +6,7 @@ public class EnemyAttackSO : ScriptableObject
     public string attackName;
 
     [Range(1f, 10000f)]
-    public int damage;
+    public float damage;
 
     [Range(1f, 100f)]
     public float range;

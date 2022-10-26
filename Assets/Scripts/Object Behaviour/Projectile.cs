@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     private float speed;
     private float lifespan;
     private float damage;
-    private bool piercing;
+    private int piercing;
 
     private Vector3 velocity;
     private Vector3 lastFramePosition;
@@ -50,8 +50,10 @@ public class Projectile : MonoBehaviour
         {
             if (hitInfo.collider.gameObject.TryGetComponent<BasicEnemy>(out BasicEnemy enemyComponent))
             {
-                if (!piercing) Destroy(transform.gameObject);
                 enemyComponent.TakeDamage(damage);
+                
+                if (piercing > 0) piercing--;
+                else Destroy(gameObject);
             }
         }
     }

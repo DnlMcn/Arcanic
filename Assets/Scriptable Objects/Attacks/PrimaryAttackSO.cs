@@ -4,10 +4,12 @@ using UnityEngine;
 public class PrimaryAttackSO : ScriptableObject
 {
     public ProjectileSO projectile;
+
     public bool isAutomatic;
     [Range(10, 5000)] public float rpm; // Rounds per minute of the selected weapon
+
     public bool infiniteAmmo;
-    [Range(1, 100)] public int maxAmmo; // Maximum ammunition a player can hold in a single load
+    [Range(1, 100)] public int maxAmmo; // Amount of ammo a player can have loaded at a time
     [Range(0f, 10f)] public float reloadTime; // Time it takes to reload, in seconds.
 
     public void LogMaxDPS()

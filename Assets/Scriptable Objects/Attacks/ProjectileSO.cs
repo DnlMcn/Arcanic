@@ -8,5 +8,5 @@ public class ProjectileSO : ScriptableObject
     [Range(1f, 500f)] public float travelSpeed;
     [Range(0.1f, 30f)] public float lifespan;
     [Range(1f, 50f)] public float damage;
-    public bool piercing;
+    public int piercing;
 }

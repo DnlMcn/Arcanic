@@ -159,7 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnRate: 1
   spawnRateIncreaseModifier: 1.1
-  spawnRateIncreaseInterval: 10
+  spawnRateIncreaseInterval: 5
   SpawnPoints:
   - {fileID: 527362574}
   - {fileID: 335709011}
