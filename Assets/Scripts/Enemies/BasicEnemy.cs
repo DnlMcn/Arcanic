@@ -6,9 +6,21 @@ public class BasicEnemy : MonoBehaviour
 {
     public EnemySO enemyType;
     public GameEvent onReceiveDamage;
+    public EnemyRuntimeSet runtimeSet;
 
     float maxHealth, health;
     float speed;
+    bool alwaysChases;
+
+    void OnEnable()
+    {
+        runtimeSet.Add(this);
+    }
+
+    void OnDisable()
+    {
+        runtimeSet.Remove(this);
+    }
 
     void Start()
     {
@@ -19,7 +31,7 @@ public class BasicEnemy : MonoBehaviour
 
     void Update() 
     {
-        ChasePlayer();
+        if (alwaysChases) ChasePlayer();
     }
 
     void ChasePlayer()

@@ -8,8 +8,10 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] [Range(1f, 2f)] private float spawnRateIncreaseModifier = 1.1f;
     [SerializeField] [Range(1f, 60f)] private float spawnRateIncreaseInterval = 10f;
 
-    public Transform[] SpawnPoints;
-    public GameObject EnemyPrefab;
+    [SerializeField] Transform[] SpawnPoints;
+    [SerializeField] GameObject EnemyPrefab;
+
+    [SerializeField]
 
     void Start()
     {
@@ -35,8 +37,8 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    void SpawnNewEnemy() {
-
+    void SpawnNewEnemy() 
+    {
         int spawnPoint = Mathf.RoundToInt(Random.Range(0f, SpawnPoints.Length-1));
         Instantiate(EnemyPrefab, SpawnPoints[spawnPoint].transform.position, Quaternion.identity);
     }

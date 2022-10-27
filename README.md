@@ -10,6 +10,7 @@ Membros: Danilo Mancini, Diogo de Azevedo, Eduardo Dias, Felix Hioki, Gustavo Go
 
 [*GDD*](https://docs.google.com/document/d/1ecWXxq0F2T6H8f7QlhAJWdVMxCd3cVlwd0Wg-ISU3Ng/edit?usp=sharing)
 
+
 Danilo Mancini: Programação e Direção de Game Design
 
 Diogo de Azevedo: Programação e Assistência de Game Design
