@@ -11,7 +11,7 @@ public class TroopSO : ScriptableObject
     public TroopLevelSO levelMachine1;
     public TroopLevelSO levelMachine2;
 
-    public TroopLevelSO GetTroopLevel (int level)
+    public TroopLevelSO GetTroopLevel(int level)
     {
         switch (level)
         {
