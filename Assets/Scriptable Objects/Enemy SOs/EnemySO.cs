@@ -5,6 +5,8 @@ public class EnemySO : ScriptableObject
 {
     public string enemyName;
     public GameObject prefab;
+    
+    public EnemyRuntimeSet globalRuntimeSet;
     public EnemyRuntimeSet runtimeSet;
 
     [Range(1f, 10000f)] public float maxHealth;

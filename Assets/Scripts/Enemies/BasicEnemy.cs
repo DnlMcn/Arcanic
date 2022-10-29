@@ -13,6 +13,12 @@ public class BasicEnemy : MonoBehaviour
     float speed;
     bool alwaysChases;
 
+    void Awake()
+    {
+        globalRuntimeSet = enemyType.globalRuntimeSet;
+        runtimeSet = enemyType.runtimeSet;
+    }
+
     void OnEnable()
     {
         runtimeSet.Add(this);
@@ -56,5 +62,13 @@ public class BasicEnemy : MonoBehaviour
     public void LogDamage()
     {
         Debug.Log("Enemy hit.");
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.CompareTag("Kill Plane"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
