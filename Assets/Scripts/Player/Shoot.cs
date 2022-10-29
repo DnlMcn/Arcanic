@@ -67,7 +67,7 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        LogContinuous();
+        
     }
 
     private void SwitchPrimary()
@@ -145,7 +145,7 @@ public class Shoot : MonoBehaviour
         isGamepad = pi.currentControlScheme.Equals("Gamepad") ? true : false;
     }
 
-    void LogContinuous()
+    void LogGunState()
     {
         Debug.Log("Pode atirar? " + canShoot);
         Debug.Log("Está atirando? " + isShooting);

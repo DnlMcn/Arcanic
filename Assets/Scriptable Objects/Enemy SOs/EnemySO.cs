@@ -10,7 +10,7 @@ public class EnemySO : ScriptableObject
     [Range(1f, 10000f)] public float maxHealth;
     [Range(1f, 100f)] public float movementSpeed;
     
-    [SerializeField] bool alwaysChases = true;
+    [SerializeField] public bool alwaysChases = true;
 
     public EnemyAttackSO attack1;
     public EnemyAttackSO attack2;

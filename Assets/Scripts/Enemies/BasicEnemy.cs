@@ -6,6 +6,7 @@ public class BasicEnemy : MonoBehaviour
 {
     public EnemySO enemyType;
     public GameEvent onReceiveDamage;
+    public EnemyRuntimeSet globalRuntimeSet;
     public EnemyRuntimeSet runtimeSet;
 
     float maxHealth, health;
@@ -27,6 +28,7 @@ public class BasicEnemy : MonoBehaviour
         maxHealth = enemyType.maxHealth;
         health = maxHealth;
         speed = enemyType.movementSpeed;
+        alwaysChases = enemyType.alwaysChases;
     }
 
     void Update() 

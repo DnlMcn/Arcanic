@@ -130,6 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: {fileID: 11400000, guid: 4ae458d1abddecf42807a719ee3a448c, type: 2}
   onReceiveDamage: {fileID: 11400000, guid: 18a424c0a9f141247bfc7f73cf97817b, type: 2}
+  globalRuntimeSet: {fileID: 0}
+  runtimeSet: {fileID: 0}
 --- !u!114 &1013150127649188599
 MonoBehaviour:
   m_ObjectHideFlags: 0
