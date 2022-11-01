@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Bob
   prefab: {fileID: 2621545610760009568, guid: 81271bbf853ff8c409e9d4e901b5c221, type: 3}
+  globalRuntimeSet: {fileID: 11400000, guid: 46e30049e494557448b4ad248fe18052, type: 2}
   runtimeSet: {fileID: 11400000, guid: 4cc7809a38a706742bbcae46ebdbea1b, type: 2}
   maxHealth: 10
   movementSpeed: 8
