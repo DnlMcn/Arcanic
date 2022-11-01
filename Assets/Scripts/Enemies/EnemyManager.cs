@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] Transform[] SpawnPoints;
     [SerializeField] GameObject EnemyPrefab;
 
-    [SerializeField]
+    public static EnemyRuntimeSet GlobalEnemyRuntimeSet;
 
     void Start()
     {

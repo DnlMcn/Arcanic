@@ -1,17 +1,17 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Troop", menuName = "Scriptable Objects/Troop")]
-public class TroopSO : ScriptableObject
+[CreateAssetMenu(fileName = "New Unit", menuName = "Scriptable Objects/Unit")]
+public class UnitSO : ScriptableObject
 {
-    public string troopName;
+    public string UnitName;
 
-    public TroopLevelSO levelBeast2;
-    public TroopLevelSO levelBeast1;
-    public TroopLevelSO levelBase;
-    public TroopLevelSO levelMachine1;
-    public TroopLevelSO levelMachine2;
+    public UnitLevelSO levelBeast2;
+    public UnitLevelSO levelBeast1;
+    public UnitLevelSO levelBase;
+    public UnitLevelSO levelMachine1;
+    public UnitLevelSO levelMachine2;
 
-    public TroopLevelSO GetTroopLevel(int level)
+    public UnitLevelSO GetUnitLevel(int level)
     {
         switch (level)
         {

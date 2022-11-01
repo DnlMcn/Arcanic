@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Troop Level", menuName = "Scriptable Objects/Troop Level")]
-public class TroopLevelSO : ScriptableObject
+[CreateAssetMenu(fileName = "New Unit Level", menuName = "Scriptable Objects/Unit Level")]
+public class UnitLevelSO : ScriptableObject
 {
     public string levelName;
     public int pole;  // Define o polo da tropa. -1 é besta, 1 é máquina e 0 é base.
