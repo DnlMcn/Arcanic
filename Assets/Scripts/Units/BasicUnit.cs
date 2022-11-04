@@ -22,6 +22,12 @@ public class BasicUnit : MonoBehaviour
     void Start()
     {
         level = type.GetUnitLevel(levelIndex);
+
+        maxHealth = level.maxHealth;
+        health = maxHealth;
+        regen = level.regen;
+        baseDamage = level.baseDamage;
+        movementSpeed = level.movementSpeed;
     }
 
     void Update()
@@ -29,20 +35,20 @@ public class BasicUnit : MonoBehaviour
         MoveTowardsClosestEnemy();
     }
 
-    void MoveTowardsClosestEnemy()
+    protected void MoveTowardsClosestEnemy()
     {
         Transform target = GetClosestEnemy(globalEnemyRuntimeSet, transform);
         transform.LookAt(target);
         transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
     }
 
-    public Transform GetClosestEnemy(RuntimeSet<BasicEnemy> potentialTargets, Transform fromThis)
+    protected Transform GetClosestEnemy(RuntimeSet<BasicEnemy> potentialTargets, Transform fromThis)
     {
         Transform bestTarget = null;
         float closestDistance = Mathf.Infinity;
         Vector3 currentPosition = fromThis.position;
 
-        for(int i = 0; i < potentialTargets.Items.Count; i++)
+        for(int i = potentialTargets.Items.Count - 1; i >= 0; i--)
         {
             Transform potentialTarget = potentialTargets.Items[i].transform;
             float distanceToTarget = Vector3.Distance(fromThis.position, potentialTarget.position);
