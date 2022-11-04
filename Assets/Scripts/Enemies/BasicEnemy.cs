@@ -6,8 +6,8 @@ public class BasicEnemy : MonoBehaviour
 {
     public EnemySO enemyType;
     public GameEvent onReceiveDamage;
-    public EnemyRuntimeSet globalRuntimeSet;
-    public EnemyRuntimeSet runtimeSet;
+    public static EnemyRuntimeSet globalRuntimeSet;
+    public static EnemyRuntimeSet runtimeSet;
 
     float maxHealth, health;
     float speed;
@@ -21,12 +21,18 @@ public class BasicEnemy : MonoBehaviour
 
     void OnEnable()
     {
+        globalRuntimeSet.Add(this);
+        Debug.Log("Added this enemy to the global enemy runtime set");
         runtimeSet.Add(this);
+        Debug.Log("Added this enemy to the enemy runtime set");
     }
 
     void OnDisable()
     {
+        globalRuntimeSet.Remove(this);
+        Debug.Log("Removed this enemy from the global enemy runtime set");
         runtimeSet.Remove(this);
+        Debug.Log("Removed this enemy from the global enemy runtime set");
     }
 
     void Start()
@@ -57,11 +63,6 @@ public class BasicEnemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    public void LogDamage()
-    {
-        Debug.Log("Enemy hit.");
     }
 
     void OnTriggerEnter(Collider collider)
