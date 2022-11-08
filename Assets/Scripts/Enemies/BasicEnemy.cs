@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicEnemy : MonoBehaviour
 {
+    public event Action OnDestroyed;
+
     public EnemySO enemyType;
     public GameEvent onReceiveDamage;
     public static EnemyRuntimeSet globalRuntimeSet;
@@ -22,17 +25,13 @@ public class BasicEnemy : MonoBehaviour
     void OnEnable()
     {
         globalRuntimeSet.Add(this);
-        Debug.Log("Added this enemy to the global enemy runtime set");
         runtimeSet.Add(this);
-        Debug.Log("Added this enemy to the enemy runtime set");
     }
 
     void OnDisable()
     {
         globalRuntimeSet.Remove(this);
-        Debug.Log("Removed this enemy from the global enemy runtime set");
         runtimeSet.Remove(this);
-        Debug.Log("Removed this enemy from the global enemy runtime set");
     }
 
     void Start()
@@ -62,6 +61,7 @@ public class BasicEnemy : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            if (OnDestroyed != null) OnDestroyed();
         }
     }
 
@@ -70,6 +70,7 @@ public class BasicEnemy : MonoBehaviour
         if (collider.CompareTag("Kill Plane"))
         {
             Destroy(gameObject);
+            if (OnDestroyed != null) OnDestroyed();
         }
     }
 }

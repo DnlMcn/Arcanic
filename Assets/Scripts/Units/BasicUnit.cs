@@ -18,6 +18,8 @@ public class BasicUnit : MonoBehaviour
     protected float regen;
     protected float baseDamage;
     protected float movementSpeed;
+
+    protected bool hasTargetedEnemy = false;
     
     void Start()
     {
@@ -32,18 +34,20 @@ public class BasicUnit : MonoBehaviour
 
     void Update()
     {
-        MoveTowardsClosestEnemy();
+        if (hasTargetedEnemy) MoveTowardsClosestEnemy();
     }
 
-    protected void MoveTowardsClosestEnemy()
+    protected void MoveTowardsClosestEnemy(Transform target)
     {
-        Transform target = GetClosestEnemy(globalEnemyRuntimeSet, transform);
         transform.LookAt(target);
+        Vector3 movement = Vector3.forward * movementSpeed;
         transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
     }
 
     protected Transform GetClosestEnemy(RuntimeSet<BasicEnemy> potentialTargets, Transform fromThis)
     {
+        bestTarget.GetComponent<BasicEnemy>().OnDestroyed -= GetClosestEnemy();  // Unsubscribes to the death event of the previously targeted enemy
+
         Transform bestTarget = null;
         float closestDistance = Mathf.Infinity;
         Vector3 currentPosition = fromThis.position;
@@ -58,6 +62,8 @@ public class BasicUnit : MonoBehaviour
                 bestTarget = potentialTarget;
             }
         }  
+
+        bestTarget.GetComponent<BasicEnemy>().OnDestroyed += GetClosestEnemy();  // Subscribes to enemy's death event so it targets a different enemy if it is killed
 
         return bestTarget;
     }
