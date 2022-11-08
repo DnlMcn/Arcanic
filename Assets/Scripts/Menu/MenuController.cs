@@ -15,6 +15,12 @@ public class MenuController : MonoBehaviour
     [Header("Confirmation:")]
     [SerializeField] private GameObject confirmationPrompt = null;
 
+    [Header("Gameplay Setting:")]
+    [SerializeField] private TMP_Text controllerSenTextValue = null;
+    [SerializeField] private Slider controllerSenSlider = null;
+    [SerializeField] private int defaultSen = 4;
+    public int mainControllerSen = 4;
+
     [Header("Levels To Load:")]
 
     public string _newGameLevel;
@@ -66,6 +72,22 @@ public class MenuController : MonoBehaviour
             volumeTextValue.text = defaultVolume.ToString("0.0");
             VolumeApply();
         }
+        if(MenuType == "Gameplay"){
+            controllerSenTextValue.text = defaultSen.ToString("0");
+            controllerSenSlider.value = defaultSen;
+            mainControllerSen = defaultSen;
+            GameplayApply();
+        } 
+    }
+
+    public void SetControllerSens(float sensitivity){
+        mainControllerSen = Mathf.RoundToInt(sensitivity);
+        controllerSenTextValue.text = sensitivity.ToString("0");
+    }
+
+    public void GameplayApply(){
+        PlayerPrefs.SetInt("mastersens",mainControllerSen);
+        StartCoroutine(ConfirmationBox());
     }
 
     public IEnumerator ConfirmationBox()
