@@ -167,6 +167,7 @@ MonoBehaviour:
   - {fileID: 1386718660}
   - {fileID: 1322330709}
   EnemyPrefab: {fileID: 2621545610760009568, guid: 81271bbf853ff8c409e9d4e901b5c221, type: 3}
+  GlobalEnemyRuntimeSet: {fileID: 11400000, guid: 46e30049e494557448b4ad248fe18052, type: 2}
 --- !u!4 &54592709
 Transform:
   m_ObjectHideFlags: 0
@@ -857,7 +858,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4454343, y: 1}
+    m_SensorSize: {x: 1.7780821, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
