@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52845a674728ee46973d7986db57137, type: 3}
   m_Name: DynabearBaseSO
   m_EditorClassIdentifier: 
-  typeName: Dynabear
-  beastLevel: 0
+  levelName: 
+  pole: 0
   maxHealth: 100
   regen: 0
   baseDamage: 60

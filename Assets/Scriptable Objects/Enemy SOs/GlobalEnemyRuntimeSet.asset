@@ -12,5 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ca8143ec75ad744a0b046818f816f6, type: 3}
   m_Name: GlobalEnemyRuntimeSet
   m_EditorClassIdentifier: 
-  Items: []
-  Count: 0
+  Items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
