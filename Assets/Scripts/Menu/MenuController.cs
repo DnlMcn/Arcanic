@@ -7,31 +7,39 @@ using TMPro;
 
 public class MenuController : MonoBehaviour
 {
+    // Variaveis Volume
     [Header("Volume Setting:")]
     [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
     [SerializeField] private float defaultVolume = 1.0f;
 
+    // Confirmacao
     [Header("Confirmation:")]
     [SerializeField] private GameObject confirmationPrompt = null;
 
+    private int _qualitylevel;
+
+    // Variaveis Gameplay
     [Header("Gameplay Setting:")]
     [SerializeField] private TMP_Text controllerSenTextValue = null;
     [SerializeField] private Slider controllerSenSlider = null;
     [SerializeField] private int defaultSen = 4;
     public int mainControllerSen = 4;
 
+    // Carregar fase
     [Header("Levels To Load:")]
 
     public string _newGameLevel;
     private string levelToLoad;
     [SerializeField] private GameObject noSavedGameDialog = null;
 
+    // Novo jogo (carregar fase)
     public void NewGameDialogYes()
     {
         SceneManager.LoadScene(_newGameLevel);
     }
 
+    // Carregar "jogo salvo"
     public void LoadGameDialogYes()
     {
         if(PlayerPrefs.HasKey("SavedLevel"))
@@ -45,10 +53,12 @@ public class MenuController : MonoBehaviour
         }
     }
 
+    // Sair da aplicacao
     public void ExitButton(){
         Application.Quit();
     }
 
+    // Definir o volume
     public void SetVolume(float volume)
     {
         AudioListener.volume = volume;
@@ -56,6 +66,7 @@ public class MenuController : MonoBehaviour
 
     }
 
+    // Aplicar volume
     public void VolumeApply()
     {
         PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
@@ -63,6 +74,7 @@ public class MenuController : MonoBehaviour
 
     }
 
+    // Resetar config
     public void ResetButton(string MenuType)
     {
         if (MenuType == "Audio")
@@ -80,16 +92,27 @@ public class MenuController : MonoBehaviour
         } 
     }
 
+    // Definir Sensibilidade 
     public void SetControllerSens(float sensitivity){
         mainControllerSen = Mathf.RoundToInt(sensitivity);
         controllerSenTextValue.text = sensitivity.ToString("0");
     }
 
+    // Aplicar sensibilidade
     public void GameplayApply(){
         PlayerPrefs.SetInt("mastersens",mainControllerSen);
         StartCoroutine(ConfirmationBox());
     }
 
+    public void SetQuality(int qualityIndex){
+        _qualitylevel = qualityIndex;
+    }
+
+    public void GraphicsApply(){
+        PlayerPrefs.SetInt("masterquality", _qualitylevel);
+    }
+
+    // 
     public IEnumerator ConfirmationBox()
     {
         confirmationPrompt.SetActive(true);
