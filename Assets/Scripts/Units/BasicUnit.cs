@@ -18,23 +18,12 @@ public class BasicUnit : MonoBehaviour
     protected float regen;
     protected float baseDamage;
     protected float movementSpeed;
-
+    
     protected bool hasTargetedEnemy = false;
     protected Transform target;
-    
-    void Start()
-    {
-        level = type.GetUnitLevel(levelIndex);
-
-        maxHealth = level.maxHealth;
-        health = maxHealth;
-        regen = level.regen;
-        baseDamage = level.baseDamage;
-        movementSpeed = level.movementSpeed;
-    }
 
     void Update()
-    {
+    { 
         FindClosestEnemy(hasTargetedEnemy);
         if (target != null) MoveTowardsClosestEnemy(target);
     }

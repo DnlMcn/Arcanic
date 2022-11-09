@@ -108,6 +108,7 @@ GameObject:
   - component: {fileID: 1772512740818867128}
   - component: {fileID: 2198315477200282679}
   - component: {fileID: 5059124768826730094}
+  - component: {fileID: 3600611432123663221}
   m_Layer: 0
   m_Name: Dynabear PH
   m_TagString: Untagged
@@ -163,6 +164,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   globalEnemyRuntimeSet: {fileID: 0}
   type: {fileID: 0}
+--- !u!114 &3600611432123663221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529857234144019684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f75c2759cd668184a9709c4f0371fcb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a774bd59ceb57a3479f1b82a9d539914, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6529857234144019684}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7918928517502374650
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5268908671625771228}
   - component: {fileID: 1665898541076029679}
+  - component: {fileID: 3870266463460072937}
   m_Layer: 0
   m_Name: RangeCollider
   m_TagString: Untagged
@@ -208,6 +238,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3870266463460072937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7918928517502374650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e569438c703ffaa4c8fff06f74c9c49b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8550564312325126640
 GameObject:
   m_ObjectHideFlags: 0
