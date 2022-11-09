@@ -20,6 +20,7 @@ public class BasicUnit : MonoBehaviour
     protected float movementSpeed;
 
     protected bool hasTargetedEnemy = false;
+    protected Transform target;
     
     void Start()
     {
@@ -34,7 +35,8 @@ public class BasicUnit : MonoBehaviour
 
     void Update()
     {
-        if (hasTargetedEnemy) MoveTowardsClosestEnemy();
+        FindClosestEnemy(hasTargetedEnemy);
+        if (target != null) MoveTowardsClosestEnemy(target);
     }
 
     protected void MoveTowardsClosestEnemy(Transform target)
@@ -44,27 +46,35 @@ public class BasicUnit : MonoBehaviour
         transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
     }
 
-    protected Transform GetClosestEnemy(RuntimeSet<BasicEnemy> potentialTargets, Transform fromThis)
+    protected void FindClosestEnemy(bool hasTargetedEnemy)
     {
-        bestTarget.GetComponent<BasicEnemy>().OnDestroyed -= GetClosestEnemy();  // Unsubscribes to the death event of the previously targeted enemy
-
-        Transform bestTarget = null;
-        float closestDistance = Mathf.Infinity;
-        Vector3 currentPosition = fromThis.position;
-
-        for(int i = potentialTargets.Items.Count - 1; i >= 0; i--)
+        if (!hasTargetedEnemy)
         {
-            Transform potentialTarget = potentialTargets.Items[i].transform;
-            float distanceToTarget = Vector3.Distance(fromThis.position, potentialTarget.position);
-            if(distanceToTarget < closestDistance)
+            float closestDistance = Mathf.Infinity;
+            Vector3 currentPosition = transform.position;
+
+            RuntimeSet<BasicEnemy> potentialTargets = globalEnemyRuntimeSet;
+            for(int i = potentialTargets.Items.Count - 1; i >= 0; i--)
             {
-                closestDistance = distanceToTarget;
-                bestTarget = potentialTarget;
-            }
-        }  
+                if (potentialTargets.Items[i] != null)
+                {
+                    Transform potentialTarget = potentialTargets.Items[i].transform;
+                    float distanceToTarget = Vector3.Distance(transform.position, potentialTarget.position);
+                    if(distanceToTarget < closestDistance)
+                    {
+                        closestDistance = distanceToTarget;
+                        target = potentialTarget;
+                        hasTargetedEnemy = true;
+                    }
+                }
+            }  
 
-        bestTarget.GetComponent<BasicEnemy>().OnDestroyed += GetClosestEnemy();  // Subscribes to enemy's death event so it targets a different enemy if it is killed
+            if (target != null) target.GetComponent<BasicEnemy>().OnDestroyed += OnTargetedEnemyDeath;  // Se inscreve ao evento de morte do inimigo para que ele ache outro inimigo alvo caso o atual morra
+        }
+    }
 
-        return bestTarget;
+    protected void OnTargetedEnemyDeath()
+    {
+        hasTargetedEnemy = false;
     }
 }
