@@ -22,12 +22,6 @@ public class BasicUnit : MonoBehaviour
     protected bool hasTargetedEnemy = false;
     protected Transform target;
 
-    void Update()
-    { 
-        FindClosestEnemy(hasTargetedEnemy);
-        if (target != null) MoveTowardsClosestEnemy(target);
-    }
-
     protected void MoveTowardsClosestEnemy(Transform target)
     {
         transform.LookAt(target);

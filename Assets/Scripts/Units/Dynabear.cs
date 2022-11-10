@@ -4,31 +4,49 @@ using UnityEngine;
 
 public class Dynabear : BasicUnit
 {
-    DynabearLevelSO dynabearLevel;
-    float explosionRadius;
 
-    void Start()
-    {
-        dynabearLevel = level.dynabearLevel;
+    [SerializeField] FloatVariable explosionRadius;
+    [SerializeField] FloatVariable ressurectionTime;
+    [SerializeField] FloatVariable attackRange;
 
-        explosionRadius = dynabearLevel.explosionRadius;
-    }
+    bool ressurecting = false;
 
     void Update()
     {
+        FindClosestEnemy(hasTargetedEnemy);
+        if (target != null) MoveTowardsClosestEnemy(target);
+
+        if (target != null && Vector3.Distance(transform.position, target.position) <= attackRange.Value) Explode();
     }
 
     void Explode()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-
-        int i = 0;
-        foreach (Collider collider in colliders)
+        if (!ressurecting)
         {
-            i++;
-        }
+            Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius.Value);
 
-        Debug.Log(i);
+            int i = 0;
+            foreach (Collider collider in colliders)
+            {
+                i++;
+            }
+
+            Debug.Log(i);
+
+            // StartCoroutine(Ressurect());
+        }
+    }
+        
+    IEnumerator Ressurect()
+    {
+        ressurecting = true;
+        float movementSpeedBackup = movementSpeed;
+        movementSpeed = 0;
+
+        yield return new WaitForSeconds(ressurectionTime.Value);
+
+        movementSpeed = movementSpeedBackup;
+        ressurecting = false;
     }
 }
  
