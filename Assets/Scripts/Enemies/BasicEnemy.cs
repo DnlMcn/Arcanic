@@ -13,7 +13,7 @@ public class BasicEnemy : MonoBehaviour
     public static EnemyRuntimeSet runtimeSet;
 
     float maxHealth, health;
-    float speed;
+    float movementSpeed;
     bool alwaysChases;
 
     void Awake()
@@ -38,7 +38,7 @@ public class BasicEnemy : MonoBehaviour
     {
         maxHealth = enemyType.maxHealth;
         health = maxHealth;
-        speed = enemyType.movementSpeed;
+        movementSpeed = enemyType.movementSpeed;
         alwaysChases = enemyType.alwaysChases;
     }
 
@@ -49,8 +49,11 @@ public class BasicEnemy : MonoBehaviour
 
     void ChasePlayer()
     {
-        transform.LookAt(PlayerController.position);
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        Vector3 heightCorrectedTarget = PlayerController.position;
+        heightCorrectedTarget.y = transform.position.y;
+        transform.LookAt(heightCorrectedTarget);
+        Vector3 movement = Vector3.forward * movementSpeed * Time.deltaTime;
+        transform.Translate(movement);
     }
 
     public void TakeDamage(float damageAmount)

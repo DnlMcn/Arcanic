@@ -6,12 +6,10 @@ public class BasicUnit : MonoBehaviour
 {
     [SerializeField] EnemyRuntimeSet globalEnemyRuntimeSet;
 
-    [SerializeField] protected UnitSO type;
-    protected UnitLevelSO level;
+    [SerializeField] protected UnitSO type;  // O tipo de tropa, contendno os SOs de cada nível
+    protected UnitLevelSO level;  // O nível da tropa, contendo suas estatísticas
     protected int levelIndex = 0;  // Índice usado para selecionar o nível da tropa
-    protected int pole = 0;
-
-    protected int beastLevel;
+    protected int pole = 0;  // O polo da tropa, definindo se ela é besta ou máquina
 
     protected float maxHealth;
     protected float health;
@@ -22,11 +20,24 @@ public class BasicUnit : MonoBehaviour
     protected bool hasTargetedEnemy = false;
     protected Transform target;
 
+    void Start()
+    {
+        level = type.GetUnitLevel(levelIndex);
+
+        maxHealth = level.maxHealth;
+        health = maxHealth;
+        regen = level.regen;
+        baseDamage = level.baseDamage;
+        movementSpeed = level.movementSpeed;
+    }
+
     protected void MoveTowardsClosestEnemy(Transform target)
     {
-        transform.LookAt(target);
-        Vector3 movement = Vector3.forward * movementSpeed;
-        transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
+        Vector3 heightCorrectedTarget = target.position;
+        heightCorrectedTarget.y = transform.position.y;
+        transform.LookAt(heightCorrectedTarget);
+        Vector3 movement = Vector3.forward * movementSpeed * Time.deltaTime;
+        transform.Translate(movement);
     }
 
     protected void FindClosestEnemy(bool hasTargetedEnemy)

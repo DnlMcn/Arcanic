@@ -11,12 +11,16 @@ public class Dynabear : BasicUnit
 
     bool ressurecting = false;
 
+    bool drawExplosionRadius;
+
     void Update()
     {
         FindClosestEnemy(hasTargetedEnemy);
         if (target != null) MoveTowardsClosestEnemy(target);
 
-        if (target != null && Vector3.Distance(transform.position, target.position) <= attackRange.Value) Explode();
+        if (target != null && 
+            Vector3.Distance(transform.position, target.position) <= attackRange.Value) 
+            Explode();
     }
 
     void Explode()
@@ -47,6 +51,15 @@ public class Dynabear : BasicUnit
 
         movementSpeed = movementSpeedBackup;
         ressurecting = false;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (drawExplosionRadius)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(transform.position, explosionRadius.Value);
+        }
     }
 }
  
