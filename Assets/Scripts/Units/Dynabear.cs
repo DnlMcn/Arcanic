@@ -7,19 +7,27 @@ public class Dynabear : BasicUnit
 
     [SerializeField] FloatVariable explosionRadius;
     [SerializeField] FloatVariable ressurectionTime;
+    [SerializeField] FloatVariable postRessurectionCooldownSO;
+    private float postRessurectionCooldown;
     [SerializeField] FloatVariable attackRange;
 
     bool ressurecting = false;
+    bool isInPostRessurectionCooldown = false;
 
-    bool drawExplosionRadius;
+    public bool drawExplosionRadius;
+
+    void Start()
+    {
+        float postRessurectionCooldown = postRessurectionCooldownSO.Value;
+    }
 
     void Update()
     {
         FindClosestEnemy(hasTargetedEnemy);
-        if (target != null) MoveTowardsClosestEnemy(target);
+        if (target != null && !ressurecting) 
+            MoveTowardsClosestEnemy(target);
 
-        if (target != null && 
-            Vector3.Distance(transform.position, target.position) <= attackRange.Value) 
+        if (target != null && Vector3.Distance(transform.position, target.position) <= attackRange.Value && !ressurecting && !isInPostRessurectionCooldown) 
             Explode();
     }
 
@@ -29,17 +37,13 @@ public class Dynabear : BasicUnit
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius.Value);
 
-            int i = 0;
             foreach (Collider collider in colliders)
             {
                 if (collider.TryGetComponent<BasicEnemy>(out BasicEnemy enemyComponent))
                 {
-                    i++;
                     enemyComponent.TakeDamage(baseDamage);
                 }
             }
-
-            Debug.Log(i);
 
             StartCoroutine(Ressurect());
         }
@@ -48,13 +52,17 @@ public class Dynabear : BasicUnit
     IEnumerator Ressurect()
     {
         ressurecting = true;
-        float movementSpeedBackup = movementSpeed;
-        movementSpeed = 0;
-
         yield return new WaitForSeconds(ressurectionTime.Value);
-
-        movementSpeed = movementSpeedBackup;
+        StartCoroutine(PostRessurectionCooldown());
         ressurecting = false;
+
+    }
+
+    IEnumerator PostRessurectionCooldown()
+    {
+        isInPostRessurectionCooldown = true;
+        yield return new WaitForSeconds(postRessurectionCooldown);
+        isInPostRessurectionCooldown = false;
     }
 
     void OnDrawGizmos()
