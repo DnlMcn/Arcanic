@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 playerVelocity;
 
+    public BoolVariable isPaused;
     private PlayerControls playerControls;
     private PlayerInput playerInput;
 
@@ -63,11 +64,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        HandleInput();
-        HandleMovement();
-        HandleRotation();
+        if (!isPaused.Value)
+        {
+            HandleInput();
+            HandleMovement();
+            HandleRotation();
 
-        position = transform.position;
+            position = transform.position;
+        }
     }
 
     void HandleInput()

@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
     private InputAction menu;
 
     [SerializeField] private GameObject pausedUI;
-    [SerializeField] private bool isPaused; 
+    [SerializeField] private BoolVariable isPaused; 
  
     void Awake() {
         playerControls = new PlayerControls();   
@@ -33,8 +33,8 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Pause (InputAction.CallbackContext context){
-        isPaused = !isPaused;
-        if(isPaused){
+        isPaused.Value = !isPaused.Value;
+        if(isPaused.Value){
             ActivateMenu();
         }
         else{
@@ -51,6 +51,6 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         AudioListener.pause = false;
         pausedUI.SetActive(false);
-        isPaused = false;
+        isPaused.Value = false;
     }
 }
