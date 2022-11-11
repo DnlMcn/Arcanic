@@ -14,6 +14,7 @@ public class BasicEnemy : MonoBehaviour
 
     float maxHealth, health;
     float movementSpeed;
+    float preventCollisionRange;
     bool alwaysChases;
 
     void Awake()
@@ -40,11 +41,13 @@ public class BasicEnemy : MonoBehaviour
         health = maxHealth;
         movementSpeed = enemyType.movementSpeed;
         alwaysChases = enemyType.alwaysChases;
+        preventCollisionRange = transform.localScale.z;
     }
 
     void Update() 
     {
         if (alwaysChases) ChasePlayer();
+        PreventCollision();
     }
 
     void ChasePlayer()
@@ -58,7 +61,6 @@ public class BasicEnemy : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        // onReceiveDamage.Raise();
         health -= damageAmount;
 
         if (health <= 0)
@@ -75,5 +77,14 @@ public class BasicEnemy : MonoBehaviour
             Destroy(gameObject);
             if (OnDestroyed != null) OnDestroyed();
         }
+    }
+
+    void PreventCollision()
+    {
+        if (Vector3.Distance(transform.position, PlayerController.position) <= preventCollisionRange)
+        {
+            movementSpeed = 0;
+        }
+        else movementSpeed = enemyType.movementSpeed;
     }
 }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d68546f558aec9440b769c7e86c45118, type: 3}
   m_Name: DynabearBaseRessurectionTime
   m_EditorClassIdentifier: 
-  Value: 5
+  Value: 3

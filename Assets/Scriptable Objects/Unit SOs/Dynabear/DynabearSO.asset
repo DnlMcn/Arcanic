@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66049c64a8a47b4dac4715c297db4f4, type: 3}
   m_Name: DynabearSO
   m_EditorClassIdentifier: 
-  troopName: Dynabear
+  UnitName: Dynabear
   levelBeast2: {fileID: 0}
   levelBeast1: {fileID: 0}
   levelBase: {fileID: 11400000, guid: 6240b8c5fe847534fa507e7062bd6e11, type: 2}

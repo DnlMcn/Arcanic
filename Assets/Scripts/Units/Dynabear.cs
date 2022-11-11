@@ -32,12 +32,16 @@ public class Dynabear : BasicUnit
             int i = 0;
             foreach (Collider collider in colliders)
             {
-                i++;
+                if (collider.TryGetComponent<BasicEnemy>(out BasicEnemy enemyComponent))
+                {
+                    i++;
+                    enemyComponent.TakeDamage(baseDamage);
+                }
             }
 
             Debug.Log(i);
 
-            // StartCoroutine(Ressurect());
+            StartCoroutine(Ressurect());
         }
     }
         
