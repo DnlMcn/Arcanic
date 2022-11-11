@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -9,16 +10,11 @@ public class PauseMenu : MonoBehaviour
     private InputAction menu;
 
     [SerializeField] private GameObject pausedUI;
+    [SerializeField] private GameObject optionsMenu;
     [SerializeField] private BoolVariable isPaused; 
  
     void Awake() {
         playerControls = new PlayerControls();   
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnEnable() {
@@ -52,5 +48,18 @@ public class PauseMenu : MonoBehaviour
         AudioListener.pause = false;
         pausedUI.SetActive(false);
         isPaused.Value = false;
+
     }
+
+        public void ExitButton(){
+        Application.Quit();
+    }
+
+public void loadlevel(string MainMenu){
+
+SceneManager.LoadScene(MainMenu);
+
+}
+
+
 }
