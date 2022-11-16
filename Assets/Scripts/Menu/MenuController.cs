@@ -17,8 +17,6 @@ public class MenuController : MonoBehaviour
     [Header("Confirmation:")]
     [SerializeField] private GameObject confirmationPrompt = null;
 
-    private int _qualitylevel;
-
     // Variaveis Gameplay
     [Header("Gameplay Setting:")]
     [SerializeField] private TMP_Text controllerSenTextValue = null;
@@ -26,6 +24,13 @@ public class MenuController : MonoBehaviour
     [SerializeField] private int defaultSen = 4;
     public int mainControllerSen = 4;
 
+     [Header("Graphics Setting:")]
+    private int _qualitylevel;
+
+     [Header("Levels To Load:")]
+     public Dropdown resolutionDropdown;
+     private Resolution[] resolutions;
+     
     // Carregar fase
     [Header("Levels To Load:")]
 
@@ -33,10 +38,33 @@ public class MenuController : MonoBehaviour
     private string levelToLoad;
     [SerializeField] private GameObject noSavedGameDialog = null;
 
+    private void Start()
+    {
+        resolutions = Screen.resolutions;
+        resolutionDropdown.ClearOptions();
+
+        List<string> options = new List <string>();
+
+        int currentResolutionIndex = 0;
+
+        foreach (Resolution resolution in resolutions)
+        {
+            string option = resolution.width + "x " + resolution.height;
+        }
+
+        // for (int i = 0; i < resolutions.Lenght - 1; i++)
+        // {
+        //     string option = resolutions[i].width + "x " + resolutions[i].height;
+        // }
+
+    }
+
     // Novo jogo (carregar fase)
     public void NewGameDialogYes()
     {
         SceneManager.LoadScene(_newGameLevel);
+         Time.timeScale = 1;
+        
     }
 
     // Carregar "jogo salvo"
@@ -110,6 +138,8 @@ public class MenuController : MonoBehaviour
 
     public void GraphicsApply(){
         PlayerPrefs.SetInt("masterquality", _qualitylevel);
+        QualitySettings.SetQualityLevel(_qualitylevel);
+        StartCoroutine(ConfirmationBox());
     }
 
     // 

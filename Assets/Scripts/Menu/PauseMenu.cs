@@ -11,7 +11,9 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] private GameObject pausedUI;
     [SerializeField] private GameObject optionsMenu;
+    [SerializeField] private GameObject optionsPopOut;
     [SerializeField] private BoolVariable isPaused; 
+    
  
     void Awake() {
         playerControls = new PlayerControls();   
@@ -48,6 +50,9 @@ public class PauseMenu : MonoBehaviour
         AudioListener.pause = false;
         pausedUI.SetActive(false);
         isPaused.Value = false;
+        optionsMenu.SetActive(false);
+        optionsPopOut.SetActive(false);
+
 
     }
 
