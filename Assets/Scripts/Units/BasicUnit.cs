@@ -22,13 +22,7 @@ public class BasicUnit : MonoBehaviour
 
     void Start()
     {
-        level = type.GetUnitLevel(levelIndex);
 
-        maxHealth = level.maxHealth;
-        health = maxHealth;
-        regen = level.regen;
-        baseDamage = level.baseDamage;
-        movementSpeed = level.movementSpeed;
     }
 
     protected void MoveTowardsClosestEnemy(Transform target)
@@ -38,6 +32,7 @@ public class BasicUnit : MonoBehaviour
         transform.LookAt(heightCorrectedTarget);
         Vector3 movement = Vector3.forward * movementSpeed * Time.deltaTime;
         transform.Translate(movement);
+        Debug.Log("Moving in this direction: " + movement);
     }
 
     protected void FindClosestEnemy(bool hasTargetedEnemy)
@@ -65,10 +60,24 @@ public class BasicUnit : MonoBehaviour
 
             if (target != null) target.GetComponent<BasicEnemy>().OnDestroyed += OnTargetedEnemyDeath;  // Se inscreve ao evento de morte do inimigo para que ele ache outro inimigo alvo caso o atual morra
         }
+
+        if (target == null) Debug.Log("Enemy to target was not found");
+    }
+
+    protected void GetUnitLevelData()
+    {
+        level = type.GetUnitLevel(levelIndex);
+
+        maxHealth = level.maxHealth;
+        health = maxHealth;
+        regen = level.regen;
+        baseDamage = level.baseDamage;
+        movementSpeed = level.movementSpeed;
     }
 
     protected void OnTargetedEnemyDeath()
     {
         hasTargetedEnemy = false;
+        Debug.Log("Targeted enemy died.");
     }
 }

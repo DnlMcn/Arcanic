@@ -27,12 +27,14 @@ public class BasicEnemy : MonoBehaviour
     {
         globalRuntimeSet.Add(this);
         runtimeSet.Add(this);
+        Debug.Log("Enemy added to runtime sets.");
     }
 
     void OnDisable()
     {
         globalRuntimeSet.Remove(this);
         runtimeSet.Remove(this);
+        Debug.Log("Enemy removed from runtime sets.");
     }
 
     void Start()

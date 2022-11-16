@@ -149,7 +149,9 @@ MonoBehaviour:
   type: {fileID: 11400000, guid: c72f4b4ac7f39ae4f9b462e109e66c54, type: 2}
   explosionRadius: {fileID: 11400000, guid: a24864eda8ee90b45a75ee0212c34fd2, type: 2}
   ressurectionTime: {fileID: 11400000, guid: 583de0f2f80776e45b151736bc0a54f6, type: 2}
+  postRessurectionCooldownSO: {fileID: 11400000, guid: 741e2f0d9344c2143b75fe601102ca6e, type: 2}
   attackRange: {fileID: 11400000, guid: d3682adac7dcefc489fe1a9e9d59f3f3, type: 2}
+  drawExplosionRadius: 1
 --- !u!1 &8550564312325126640
 GameObject:
   m_ObjectHideFlags: 0

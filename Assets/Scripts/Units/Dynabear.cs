@@ -7,18 +7,15 @@ public class Dynabear : BasicUnit
 
     [SerializeField] FloatVariable explosionRadius;
     [SerializeField] FloatVariable ressurectionTime;
-    [SerializeField] FloatVariable postRessurectionCooldownSO;
-    private float postRessurectionCooldown;
     [SerializeField] FloatVariable attackRange;
 
     bool ressurecting = false;
-    bool isInPostRessurectionCooldown = false;
 
     public bool drawExplosionRadius;
 
     void Start()
     {
-        float postRessurectionCooldown = postRessurectionCooldownSO.Value;
+        GetUnitLevelData();
     }
 
     void Update()
@@ -27,7 +24,7 @@ public class Dynabear : BasicUnit
         if (target != null && !ressurecting) 
             MoveTowardsClosestEnemy(target);
 
-        if (target != null && Vector3.Distance(transform.position, target.position) <= attackRange.Value && !ressurecting && !isInPostRessurectionCooldown) 
+        if (target != null && Vector3.Distance(transform.position, target.position) <= attackRange.Value && !ressurecting) 
             Explode();
     }
 
@@ -53,16 +50,7 @@ public class Dynabear : BasicUnit
     {
         ressurecting = true;
         yield return new WaitForSeconds(ressurectionTime.Value);
-        StartCoroutine(PostRessurectionCooldown());
         ressurecting = false;
-
-    }
-
-    IEnumerator PostRessurectionCooldown()
-    {
-        isInPostRessurectionCooldown = true;
-        yield return new WaitForSeconds(postRessurectionCooldown);
-        isInPostRessurectionCooldown = false;
     }
 
     void OnDrawGizmos()

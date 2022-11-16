@@ -98,6 +98,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Create Dynabear"",
+                    ""type"": ""Button"",
+                    ""id"": ""01a886e4-dc77-4708-bcc4-9dc2df14a4b2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -320,6 +329,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""180d48df-96aa-4063-98f6-e1656ffb6396"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Create Dynabear"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -403,6 +423,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_SwitchPrimary = m_Player.FindAction("Switch Primary", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
+        m_Player_CreateDynabear = m_Player.FindAction("Create Dynabear", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
@@ -473,6 +494,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_SwitchPrimary;
     private readonly InputAction m_Player_Reload;
+    private readonly InputAction m_Player_CreateDynabear;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -485,6 +507,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @SwitchPrimary => m_Wrapper.m_Player_SwitchPrimary;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
+        public InputAction @CreateDynabear => m_Wrapper.m_Player_CreateDynabear;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -518,6 +541,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
+                @CreateDynabear.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCreateDynabear;
+                @CreateDynabear.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCreateDynabear;
+                @CreateDynabear.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCreateDynabear;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -546,6 +572,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
+                @CreateDynabear.started += instance.OnCreateDynabear;
+                @CreateDynabear.performed += instance.OnCreateDynabear;
+                @CreateDynabear.canceled += instance.OnCreateDynabear;
             }
         }
     }
@@ -611,6 +640,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnSwitchPrimary(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+        void OnCreateDynabear(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
