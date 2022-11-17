@@ -27,8 +27,8 @@ public class MenuController : MonoBehaviour
      [Header("Graphics Setting:")]
     private int _qualitylevel;
 
-     [Header("Levels To Load:")]
-     public Dropdown resolutionDropdown;
+     [Header("Resolution Dropdown:")]
+     public TMP_Dropdown resolutionDropdown;
      private Resolution[] resolutions;
      
     // Carregar fase
@@ -38,26 +38,47 @@ public class MenuController : MonoBehaviour
     private string levelToLoad;
     [SerializeField] private GameObject noSavedGameDialog = null;
 
-    private void Start()
-    {
-        resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
+    // private void Start()
+    // {
+    //     resolutions = Screen.resolutions;
+    //     resolutionDropdown.ClearOptions();
 
-        List<string> options = new List <string>();
+    //     List<string> options = new List <string>();
 
-        int currentResolutionIndex = 0;
+    //     int currentResolutionIndex = 0;
 
-        foreach (Resolution resolution in resolutions)
-        {
-            string option = resolution.width + "x " + resolution.height;
-        }
+    //     //  foreach (Resolution resolution in resolutions)
+    //     //  {
+    //     //      string option = resolution.width + "x " + resolution.height;
+    //     //         options.Add(option);
+    //     //  }   
 
-        // for (int i = 0; i < resolutions.Lenght - 1; i++)
-        // {
-        //     string option = resolutions[i].width + "x " + resolutions[i].height;
-        // }
+    //      for (int i = 0; i < resolutions.Lenght; i++)
+    //      {
+    //          string option = resolutions[i].width + "x " + resolutions[i].height;
+    //          options.Add(option);
 
-    }
+    //          if(resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
+    //          {
+
+    //          currentResolutionIndex = i;    
+
+    //          }
+
+            
+    //      }
+         
+    //         resolutionDropdown.AddOptions(options);
+    //          resolutionDropdown.value = currentResolutionIndex;
+    //          resolutionDropdown.RefreshShownValue();
+    // }
+
+
+    // public void SetResolution(int resolutionIndex)
+    // {
+    //     Resolution resolution = resolutions[resolutionIndex];
+    //     Screen.SetResolution(resolution.width, resolution.height,Screen.fullScreen);
+    // }
 
     // Novo jogo (carregar fase)
     public void NewGameDialogYes()
