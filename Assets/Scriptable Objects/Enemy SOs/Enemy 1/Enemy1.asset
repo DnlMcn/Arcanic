@@ -18,8 +18,8 @@ MonoBehaviour:
   runtimeSet: {fileID: 11400000, guid: 4cc7809a38a706742bbcae46ebdbea1b, type: 2}
   maxHealth: 10
   movementSpeed: 8
-  bloodDrop: 7
-  metalDrop: 3
+  bloodDrop: 3
+  metalDrop: 1
   alwaysChases: 1
   attack1: {fileID: 11400000, guid: b847bf19bd0bd414c9e3c926f973d22e, type: 2}
   attack2: {fileID: 0}
