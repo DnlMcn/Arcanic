@@ -15,8 +15,11 @@ public class ResourceUpdater : MonoBehaviour
 
     void UpdateResources()
     {
-        bloodHUD.GetComponent<TMPro.TextMeshProUGUI>().text = ResourceManager.Blood.Value;
-        metalHUD.GetComponent<TMPro.TextMeshProUGUI>().text = ResourceManager.Metal.Value;
-        MatterHUD.GetComponent<TMPro.TextMeshProUGUI>().text = ResourceManager.Matter.Value;
+        bloodHUD.GetComponent<TMPro.TextMeshProUGUI>().text = 
+            "Sangue: " + ResourceManager.Blood.Value.ToString();
+        metalHUD.GetComponent<TMPro.TextMeshProUGUI>().text =
+            "Metal: " + ResourceManager.Metal.Value.ToString();
+        matterHUD.GetComponent<TMPro.TextMeshProUGUI>().text =
+            "Matéria: " + ResourceManager.Matter.Value.ToString();
     }
 }

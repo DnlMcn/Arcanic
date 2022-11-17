@@ -6,6 +6,7 @@ using UnityEngine;
 public class BasicEnemy : MonoBehaviour
 {
     public event Action OnDestroyed;
+    public static int enemiesKilled;
 
     public EnemySO enemyType;
     public static EnemyRuntimeSet globalRuntimeSet;
@@ -28,14 +29,14 @@ public class BasicEnemy : MonoBehaviour
     {
         globalRuntimeSet.Add(this);
         runtimeSet.Add(this);
-        Debug.Log("Enemy added to runtime sets.");
     }
 
     void OnDisable()
     {
         globalRuntimeSet.Remove(this);
         runtimeSet.Remove(this);
-        Debug.Log("Enemy removed from runtime sets.");
+
+        enemiesKilled++;
     }
 
     void Start()
