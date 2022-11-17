@@ -31,6 +31,7 @@ public class ResourceManager : MonoBehaviour
         Debug.Log("Matter: " + Matter.Value);
     }
 
+
     void SetResourceReferences()
     {
         Blood = setBlood;
