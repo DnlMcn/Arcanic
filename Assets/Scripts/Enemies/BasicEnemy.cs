@@ -37,6 +37,8 @@ public class BasicEnemy : MonoBehaviour
         runtimeSet.Remove(this);
 
         enemiesKilled++;
+        Debug.Log("Enemies killed: " + enemiesKilled);
+        WaveManager.CheckWaveCompletion();
     }
 
     void Start()

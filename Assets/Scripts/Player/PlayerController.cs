@@ -119,8 +119,11 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Creating dynabear");
         
-        
-        Instantiate(dynabearPrefab, transform.Find("Unit Spawn Point").position, Quaternion.identity);
+        if (ResourceManager.Matter.Value >= 5)
+        {
+            Instantiate(dynabearPrefab, transform.Find("Unit Spawn Point").position, Quaternion.identity);
+            ResourceManager.Matter.Subtract(5);
+        }
     }
 
     IEnumerator Dash()

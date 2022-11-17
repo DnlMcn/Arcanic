@@ -24,14 +24,6 @@ public class ResourceManager : MonoBehaviour
         Matter.Reset();
     }
 
-    void Update()
-    {
-        Debug.Log("Blood: " + Blood.Value);
-        Debug.Log("Metal: " + Metal.Value);
-        Debug.Log("Matter: " + Matter.Value);
-    }
-
-
     void SetResourceReferences()
     {
         Blood = setBlood;
