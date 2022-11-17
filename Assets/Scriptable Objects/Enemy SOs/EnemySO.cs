@@ -11,6 +11,10 @@ public class EnemySO : ScriptableObject
 
     [Range(1f, 10000f)] public float maxHealth;
     [Range(1f, 100f)] public float movementSpeed;
+
+    // Numbers defining the resources the enemy drops when killed
+    [Range(1f, 100f)] public float bloodDrop;
+    [Range(1f, 100f)] public float metalDrop;
     
     [SerializeField] public bool alwaysChases = true;
 

@@ -9,6 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eb82415b7b4ee345af9bab5596779bf, type: 3}
-  m_Name: OnEnemyReceiveDamage
+  m_Script: {fileID: 11500000, guid: 0c7270c1913b97e48a9dba1f7881e2b7, type: 3}
+  m_Name: Matter
   m_EditorClassIdentifier: 
+  Name: "Mat\xE9ria Configur\xE1vel"
+  Value: 0

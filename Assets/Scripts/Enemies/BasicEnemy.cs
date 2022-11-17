@@ -8,7 +8,6 @@ public class BasicEnemy : MonoBehaviour
     public event Action OnDestroyed;
 
     public EnemySO enemyType;
-    public GameEvent onReceiveDamage;
     public static EnemyRuntimeSet globalRuntimeSet;
     public static EnemyRuntimeSet runtimeSet;
 
@@ -16,6 +15,8 @@ public class BasicEnemy : MonoBehaviour
     float movementSpeed;
     float preventCollisionRange;
     bool alwaysChases;
+
+    Vector3 heightCorrectedTarget;
 
     void Awake()
     {
@@ -54,7 +55,7 @@ public class BasicEnemy : MonoBehaviour
 
     void ChasePlayer()
     {
-        Vector3 heightCorrectedTarget = PlayerController.position;
+        heightCorrectedTarget = PlayerController.position;
         heightCorrectedTarget.y = transform.position.y;
         transform.LookAt(heightCorrectedTarget);
         Vector3 movement = Vector3.forward * movementSpeed * Time.deltaTime;
@@ -67,9 +68,21 @@ public class BasicEnemy : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
-            if (OnDestroyed != null) OnDestroyed();
+            Die();
         }
+    }
+
+    void DropResources()
+    {
+        ResourceManager.Blood.Add(enemyType.bloodDrop);
+        ResourceManager.Metal.Add(enemyType.metalDrop);
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
+        if (OnDestroyed != null) OnDestroyed();
+        DropResources();
     }
 
     void OnTriggerEnter(Collider collider)
@@ -83,7 +96,7 @@ public class BasicEnemy : MonoBehaviour
 
     void PreventCollision()
     {
-        if (Vector3.Distance(transform.position, PlayerController.position) <= preventCollisionRange)
+        if (Vector3.Distance(transform.position, heightCorrectedTarget) <= preventCollisionRange)
         {
             movementSpeed = 0;
         }
