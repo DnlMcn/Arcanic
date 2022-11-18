@@ -1550,7 +1550,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &472977854
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5380,6 +5380,8 @@ MonoBehaviour:
   controllerSenSlider: {fileID: 1288835763}
   defaultSen: 4
   mainControllerSen: 4
+  qualityDropdown: {fileID: 1965389790}
+  resolutionDropdown: {fileID: 1719124101}
   _newGameLevel: Main
   noSavedGameDialog: {fileID: 1412257488}
 --- !u!4 &1177156704
@@ -6502,7 +6504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1373241002
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7605,7 +7607,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1177156703}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: GameplayApply
+        m_MethodName: GraphicsApply
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8814,7 +8816,19 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1177156703}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: SetResolution
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1719124102
 MonoBehaviour:
@@ -9436,9 +9450,23 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Alto
       m_Image: {fileID: 0}
+    - m_Text: Ultra
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1177156703}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: SetQuality
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1965389791
 MonoBehaviour:
@@ -10166,6 +10194,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006618121}
   m_CullTransparentMesh: 1
+--- !u!1 &2036428402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2036428403}
+  - component: {fileID: 2036428404}
+  m_Layer: 0
+  m_Name: LoadPrefs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2036428403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036428402}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 205.84175, y: 128.63834, z: -0.08647142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2036428404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036428402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30fad53c9185bd499b791e05b4da2ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canUse: 1
+  menuController: {fileID: 1177156703}
+  volumeTextValue: {fileID: 674749026}
+  volumeSlider: {fileID: 521346311}
+  qualityDropdown: {fileID: 1965389790}
+  controllerSenTextValue: {fileID: 1553335176}
+  controllerSenSlider: {fileID: 1288835763}
 --- !u!1 &2051533136
 GameObject:
   m_ObjectHideFlags: 0
@@ -10275,7 +10354,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1177156703}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: GameplayApply
+        m_MethodName: GraphicsApply
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10283,7 +10362,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2051533139
 MonoBehaviour:

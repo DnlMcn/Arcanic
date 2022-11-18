@@ -24,12 +24,13 @@ public class MenuController : MonoBehaviour
     [SerializeField] private int defaultSen = 4;
     public int mainControllerSen = 4;
 
-     [Header("Graphics Setting:")]
+    [Header("Quality Dropdown:")]
+    [SerializeField] private TMP_Dropdown qualityDropdown;
     private int _qualitylevel;
 
-     [Header("Resolution Dropdown:")]
-     public TMP_Dropdown resolutionDropdown;
-     private Resolution[] resolutions;
+    [Header("Resolution Dropdown:")]
+    public TMP_Dropdown resolutionDropdown;
+    private Resolution[] resolutions;
      
     // Carregar fase
     [Header("Levels To Load:")]
@@ -38,14 +39,14 @@ public class MenuController : MonoBehaviour
     private string levelToLoad;
     [SerializeField] private GameObject noSavedGameDialog = null;
 
-    // private void Start()
-    // {
-    //     resolutions = Screen.resolutions;
-    //     resolutionDropdown.ClearOptions();
+    private void Start()
+    {
+        resolutions = Screen.resolutions;
+        resolutionDropdown.ClearOptions();
 
-    //     List<string> options = new List <string>();
+        List<string> options = new List<string>();
 
-    //     int currentResolutionIndex = 0;
+        int currentResolutionIndex = 0;
 
     //     //  foreach (Resolution resolution in resolutions)
     //     //  {
@@ -53,38 +54,38 @@ public class MenuController : MonoBehaviour
     //     //         options.Add(option);
     //     //  }   
 
-    //      for (int i = 0; i < resolutions.Lenght; i++)
-    //      {
-    //          string option = resolutions[i].width + "x " + resolutions[i].height;
-    //          options.Add(option);
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string option = resolutions[i].width + "x" + resolutions[i].height;
+            options.Add(option);
 
-    //          if(resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
-    //          {
+            if(resolutions[i].width == Screen.width && resolutions[i].height == Screen.height)
+            {
 
-    //          currentResolutionIndex = i;    
+            currentResolutionIndex = i;    
 
-    //          }
+            }
 
-            
-    //      }
-         
-    //         resolutionDropdown.AddOptions(options);
-    //          resolutionDropdown.value = currentResolutionIndex;
-    //          resolutionDropdown.RefreshShownValue();
-    // }
+        
+        }
+        
+        resolutionDropdown.AddOptions(options);
+        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
+    }
 
 
-    // public void SetResolution(int resolutionIndex)
-    // {
-    //     Resolution resolution = resolutions[resolutionIndex];
-    //     Screen.SetResolution(resolution.width, resolution.height,Screen.fullScreen);
-    // }
+    public void SetResolution(int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height,Screen.fullScreen);
+    }
 
     // Novo jogo (carregar fase)
     public void NewGameDialogYes()
     {
         SceneManager.LoadScene(_newGameLevel);
-         Time.timeScale = 1;
+        Time.timeScale = 1;
         
     }
 
@@ -103,7 +104,8 @@ public class MenuController : MonoBehaviour
     }
 
     // Sair da aplicacao
-    public void ExitButton(){
+    public void ExitButton()
+    {
         Application.Quit();
     }
 
@@ -112,7 +114,6 @@ public class MenuController : MonoBehaviour
     {
         AudioListener.volume = volume;
         volumeTextValue.text = volume.ToString("0.0");
-
     }
 
     // Aplicar volume
@@ -120,12 +121,21 @@ public class MenuController : MonoBehaviour
     {
         PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
         StartCoroutine(ConfirmationBox());
-
     }
 
-    // Resetar config
+    // Resetar configs
     public void ResetButton(string MenuType)
     {
+
+        if (MenuType == "Graphics")
+        {
+        qualityDropdown.value = 1;
+        QualitySettings.SetQualityLevel(1);
+
+            Resolution currentResolution = Screen.currentResolution;
+            Screen.SetResolution(currentResolution.width, currentResolution.height,Screen.fullScreen);
+            GraphicsApply();
+        }
         if (MenuType == "Audio")
         {
             AudioListener.volume = defaultVolume;
@@ -142,22 +152,26 @@ public class MenuController : MonoBehaviour
     }
 
     // Definir Sensibilidade 
-    public void SetControllerSens(float sensitivity){
+    public void SetControllerSens(float sensitivity)
+    {
         mainControllerSen = Mathf.RoundToInt(sensitivity);
         controllerSenTextValue.text = sensitivity.ToString("0");
     }
 
     // Aplicar sensibilidade
-    public void GameplayApply(){
+    public void GameplayApply()
+    {
         PlayerPrefs.SetInt("mastersens",mainControllerSen);
         StartCoroutine(ConfirmationBox());
     }
 
-    public void SetQuality(int qualityIndex){
+    public void SetQuality(int qualityIndex)
+    {
         _qualitylevel = qualityIndex;
     }
 
-    public void GraphicsApply(){
+    public void GraphicsApply()
+    {
         PlayerPrefs.SetInt("masterquality", _qualitylevel);
         QualitySettings.SetQualityLevel(_qualitylevel);
         StartCoroutine(ConfirmationBox());
