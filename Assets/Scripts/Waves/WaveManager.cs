@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,44 +13,57 @@ public class WaveManager : MonoBehaviour
         Mas antes disso provavelmente vou acabar reformulando completamente o sistema de ondas.
     */
 
-    private static bool completedWave1 = false;
-    private static bool completedWave2 = false;
-    private static bool completedWave3 = false;
-    private static bool completedWave4 = false;
-    private static bool completedWave5 = false;
+    [SerializeField] EnemyManager enemyManager;
+
+    [SerializeField] [Range(0.2f, 60f)] private float spawnRate = 5f;
+    [SerializeField] [Range(1f, 2f)] private float spawnRateIncreaseModifier = 1.1f;
+    [SerializeField] [Range(1f, 60f)] private float spawnRateIncreaseInterval = 10f;
+
+    [SerializeField] [Range(0f, 30f)] private float postWaveWaitTime = 15f;
+
+    static WaveSO[] waves;
+    [SerializeField] private WaveSO[] setWaves;
+    private static int enemyCountDifference;  // Essa variável é usada para que seja contado corretamente o número de inimigos de cada onda em CheckWaveCompletion()
+
+    void Awake()
+    {
+        waves = setWaves;
+    }
 
     // Esse método é chamado toda vez que um inimigo é morto.
     public static void CheckWaveCompletion()
     {
-        if (BasicEnemy.enemiesKilled >= 10 && !completedWave1)
+        foreach (WaveSO wave in waves)
         {
-            ResourceManager.Matter.Add(5);
-            completedWave1 = true;
-            Debug.Log("Completed Wave 1!");
+            if (!wave.isCompleted && BasicEnemy.enemiesKilled >= wave.enemyCount - enemyCountDifference)
+            {
+                wave.isCompleted = true;
+                ResourceManager.Matter.Add(wave.completionReward);
+                enemyCountDifference -= wave.enemyCount;
+            }
         }
-        else if (BasicEnemy.enemiesKilled >= 25 && !completedWave2)
+    }
+
+    void ExecuteWave(WaveSO wave)
+    {
+        foreach (int enemyType in wave.enemyTypes)
         {
-            ResourceManager.Matter.Add(10);
-            completedWave2 = true;
-            Debug.Log("Completed Wave 2!");
+            for (int i; i <= wave.enemyCount / wave.enemyTypes.Length; i++)
+            {
+                EnemyManager.SpawnNewEnemy(EnemyManager.EnemyPrefabs[enemyType]);
+            }
         }
-        else if (BasicEnemy.enemiesKilled >= 50 && !completedWave3)
-        {
-            ResourceManager.Matter.Add(15);
-            completedWave3 = true;
-            Debug.Log("Completed Wave 3!");
-        }    
-        else if (BasicEnemy.enemiesKilled >= 100 && !completedWave4)
-        {
-            ResourceManager.Matter.Add(20);
-            completedWave4 = true;
-            Debug.Log("Completed Wave 4!");
-        }    
-        else if (BasicEnemy.enemiesKilled >= 150 && !completedWave5)
-        {         
-            ResourceManager.Matter.Add(25);
-            completedWave5 = true;
-            Debug.Log("Completed Wave 5!");
-        }    
+        
+    }
+
+    IEnumerator SpawnWithCooldown()
+    {
+
+    }
+
+    IEnumerator IncreaseSpawnRate()
+    {
+        spawnRate /= spawnRateIncreaseModifier;
+        yield return new WaitForSeconds(spawnRateIncreaseInterval);
     }
 }

@@ -1,6 +1,7 @@
 # Arcanic
 
-Version: [Pre-alpha 0.2.3]
+Versão: [Alpha 0.3.1]
+
 
 Arcanic é o jogo sendo desenvolvido como nosso Trabalho de Conclusão de Curso (TCC).
 
@@ -26,4 +27,4 @@ Maria Eduarda: Assistência de Arte, Redes Sociais e Assistência Geral
 Mateus Sena: Assistência Criativa, Assistência Geral
 
 
-O código, em sua maior parte, está em inglês (porque eu [Danilo] prefiro digitar código em inglês). Os comentários são em português pra facilitar o entendimento para os outros integrantes.
+O código, em sua maior parte, está em inglês (porque eu, Danilo, prefiro digitar código em inglês). Os comentários são em português pra facilitar o entendimento para os outros integrantes.
