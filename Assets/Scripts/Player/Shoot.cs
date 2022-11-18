@@ -65,11 +65,6 @@ public class Shoot : MonoBehaviour
         playerControls.Player.Reload.performed += ctx => Reload();
     }
 
-    void Update()
-    {
-        
-    }
-
     private void SwitchPrimary()
     {
         primaryNumber = (primaryNumber == 1 ? 2 : 1); // Retorna 2 se primaryNumber for 1. Retorna 1 se primaryNumber for 2.
@@ -84,7 +79,7 @@ public class Shoot : MonoBehaviour
 
     void Fire()
     {
-        if (canShoot && ammo > 0 && !isReloading)
+        if (canShoot && ammo > 0 && !isReloading && !this.GetComponent<PlayerController>().isPaused.Value)
         {
             if (isAuto) isShooting = true;
             Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;

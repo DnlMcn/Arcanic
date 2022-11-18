@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerCharacterSO character;
-    [SerializeField] GameObject dynabearPrefab;
 
     public static Vector3 position;
 
@@ -23,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private bool isGamepad;
 
-    protected CharacterController controller;
+    private CharacterController controller;
 
     private Vector2 movement;
     private Vector2 aim;
@@ -32,15 +31,17 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 playerVelocity;
 
-    protected PlayerControls playerControls;
-    protected PlayerInput playerInput;
+    public BoolVariable isPaused;
+    private PlayerControls playerControls;
+    private PlayerInput playerInput;
 
     private void Awake()
     {
-        InitPlayerControls();
+        controller = GetComponent<CharacterController>();
+        playerControls = new PlayerControls();
+        playerInput = GetComponent<PlayerInput>();
 
         playerControls.Player.Dash.performed += ctx => StartCoroutine(Dash());
-        playerControls.Player.CreateDynabear.performed += ctx => CreateDynabear();
     }
 
     private void Start() 
@@ -63,11 +64,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        HandleInput();
-        HandleMovement();
-        HandleRotation();
+        if (!isPaused.Value)
+        {
+            HandleInput();
+            HandleMovement();
+            HandleRotation();
 
-        position = transform.position;
+            position = transform.position;
+        }
     }
 
     void HandleInput()
@@ -115,17 +119,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void CreateDynabear()
-    {
-        Debug.Log("Creating dynabear");
-        
-        if (ResourceManager.Matter.Value >= 5)
-        {
-            Instantiate(dynabearPrefab, transform.Find("Unit Spawn Point").position, Quaternion.identity);
-            ResourceManager.Matter.Subtract(5);
-        }
-    }
-
     IEnumerator Dash()
     {
         if (canDash)
@@ -143,13 +136,6 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 heightCorrectedPoint = new Vector3(lookPoint.x, transform.position.y, lookPoint.z);
         transform.LookAt(heightCorrectedPoint);
-    }
-
-    protected void InitPlayerControls()
-    {
-        controller = GetComponent<CharacterController>();
-        playerControls = new PlayerControls();
-        playerInput = GetComponent<PlayerInput>();
     }
 
     public void OnDeviceChange(PlayerInput pi)

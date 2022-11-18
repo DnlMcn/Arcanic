@@ -267,6 +267,7 @@ MonoBehaviour:
   controllerDeadzone: 0.1
   gamepadRotateSmoothing: 1000
   isGamepad: 0
+  isPaused: {fileID: 11400000, guid: cf0767e53ca89ca489d396f5138d3607, type: 2}
 --- !u!114 &4416043004979553254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,16 +323,24 @@ MonoBehaviour:
     m_ActionName: Controls/Secondary Attack[/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 904fea68-60f1-42b3-a067-52362b7f8446
-    m_ActionName: Controls/Utility[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 60e21fe5-c8aa-4e3a-ba1e-a9ddc6ea53ed
     m_ActionName: Controls/Special[/Keyboard/q]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 16fe5f49-17c1-48fd-aa68-6f3f881dd221
     m_ActionName: Controls/Dash[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e6023123-20e9-40c9-b40c-1be2ddec9d49
+    m_ActionName: Player/Switch Primary[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8bb56969-842e-4202-b0df-7cb7866e202f
+    m_ActionName: Player/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 384d5106-3667-4d99-858e-885682cb8d8c
+    m_ActionName: Menu/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
