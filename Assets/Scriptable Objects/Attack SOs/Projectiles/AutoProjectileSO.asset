@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1765883940861151748, guid: f83ace550849bc445b76d91de60ca750, type: 3}
   travelSpeed: 110
-  lifespan: 5
+  lifespan: 2
   damage: 2
   piercing: 0

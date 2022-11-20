@@ -5,23 +5,5 @@ using UnityEngine.InputSystem;
 
 public class DeployUnit : PlayerController
 {
-    void Start()
-    {
     
-    }
-
-    void Update()
-    {
-        
-    }
-
-    private void OnEnable()
-    {
-        playerControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerControls.Disable();
-    }
 }
