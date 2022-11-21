@@ -32,7 +32,6 @@ public class BasicUnit : MonoBehaviour
         transform.LookAt(heightCorrectedTarget);
         Vector3 movement = Vector3.forward * movementSpeed * Time.deltaTime;
         transform.Translate(movement);
-        Debug.Log("Moving in this direction: " + movement);
     }
 
     protected void FindClosestEnemy(bool hasTargetedEnemy)
