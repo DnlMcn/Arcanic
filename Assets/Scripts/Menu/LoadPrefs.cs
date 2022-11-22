@@ -25,6 +25,7 @@ public class LoadPrefs : MonoBehaviour
     private void Awake() {
         if (canUse)
         {
+            //Carrega preferencias de audio
             if (PlayerPrefs.HasKey("masterVolume"))
             {
                 float localVolume = PlayerPrefs.GetFloat("masterVolume");
@@ -37,13 +38,14 @@ public class LoadPrefs : MonoBehaviour
             {
                 menuController.ResetButton("Audio");
             }
-
+             //Carrega preferencias graficas
             if (PlayerPrefs.HasKey("masterquality"))
             {
                 int localQuality = PlayerPrefs.GetInt("masterquality");
                 qualityDropdown.value = localQuality;
                 QualitySettings.SetQualityLevel(localQuality);
             }
+             //Carrega preferencias sensibilidade
              if (PlayerPrefs.HasKey("mastersens"))
             {
                 float localSensitivity = PlayerPrefs.GetFloat("mastersens");
