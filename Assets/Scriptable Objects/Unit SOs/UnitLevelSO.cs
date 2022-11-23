@@ -4,6 +4,7 @@ using UnityEngine;
 public class UnitLevelSO : ScriptableObject
 {
     public string levelName;
+    public GameObject levelIcon;
     public int pole;  // Define o polo da tropa. -1 é besta, 1 é máquina e 0 é base.
 
     [Range(1f, 10000f)] public float maxHealth;

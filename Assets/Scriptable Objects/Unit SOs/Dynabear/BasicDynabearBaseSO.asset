@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BasicDynabearBaseSO
   m_EditorClassIdentifier: 
   levelName: 
+  levelIcon: {fileID: 3817824653331629405, guid: 49ecfcd399d7d0546a5fbe502ae87e2d, type: 3}
   pole: 0
   maxHealth: 100
   regen: 0

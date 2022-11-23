@@ -381,6 +381,65 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UnitManager"",
+            ""id"": ""eefee1ca-3967-41f6-8cec-b4823e7a3345"",
+            ""actions"": [
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc06c579-1f7c-4c22-a89c-0671c7f48fc0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChangeUnit"",
+                    ""type"": ""Button"",
+                    ""id"": ""ad574d51-003b-4a5b-a863-fbdfc5a0e480"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5eaaecff-b3d8-4b78-ae44-398742b17836"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""561b266d-75ed-4633-843f-a775ea69f17c"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""ChangeUnit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""25f8a094-cbaa-47b7-b193-19e0ccbf6759"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeUnit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -427,6 +486,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
+        // UnitManager
+        m_UnitManager = asset.FindActionMap("UnitManager", throwIfNotFound: true);
+        m_UnitManager_Confirm = m_UnitManager.FindAction("Confirm", throwIfNotFound: true);
+        m_UnitManager_ChangeUnit = m_UnitManager.FindAction("ChangeUnit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -612,6 +675,47 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
+
+    // UnitManager
+    private readonly InputActionMap m_UnitManager;
+    private IUnitManagerActions m_UnitManagerActionsCallbackInterface;
+    private readonly InputAction m_UnitManager_Confirm;
+    private readonly InputAction m_UnitManager_ChangeUnit;
+    public struct UnitManagerActions
+    {
+        private @PlayerControls m_Wrapper;
+        public UnitManagerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Confirm => m_Wrapper.m_UnitManager_Confirm;
+        public InputAction @ChangeUnit => m_Wrapper.m_UnitManager_ChangeUnit;
+        public InputActionMap Get() { return m_Wrapper.m_UnitManager; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UnitManagerActions set) { return set.Get(); }
+        public void SetCallbacks(IUnitManagerActions instance)
+        {
+            if (m_Wrapper.m_UnitManagerActionsCallbackInterface != null)
+            {
+                @Confirm.started -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnConfirm;
+                @Confirm.performed -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnConfirm;
+                @Confirm.canceled -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnConfirm;
+                @ChangeUnit.started -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnChangeUnit;
+                @ChangeUnit.performed -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnChangeUnit;
+                @ChangeUnit.canceled -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnChangeUnit;
+            }
+            m_Wrapper.m_UnitManagerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Confirm.started += instance.OnConfirm;
+                @Confirm.performed += instance.OnConfirm;
+                @Confirm.canceled += instance.OnConfirm;
+                @ChangeUnit.started += instance.OnChangeUnit;
+                @ChangeUnit.performed += instance.OnChangeUnit;
+                @ChangeUnit.canceled += instance.OnChangeUnit;
+            }
+        }
+    }
+    public UnitManagerActions @UnitManager => new UnitManagerActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -645,5 +749,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IMenuActions
     {
         void OnPause(InputAction.CallbackContext context);
+    }
+    public interface IUnitManagerActions
+    {
+        void OnConfirm(InputAction.CallbackContext context);
+        void OnChangeUnit(InputAction.CallbackContext context);
     }
 }
