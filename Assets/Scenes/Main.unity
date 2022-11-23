@@ -157,11 +157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b72802e4378a224ba3f58f755b2cee3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyPrefabs:
+  setEnemyPrefabs:
   - {fileID: 2621545610760009568, guid: 81271bbf853ff8c409e9d4e901b5c221, type: 3}
   - {fileID: 8211650961101145464, guid: f535d72f6ccc8574f952ca042172c411, type: 3}
   GlobalEnemyRuntimeSet: {fileID: 11400000, guid: 46e30049e494557448b4ad248fe18052, type: 2}
-  SpawnPoints:
+  setSpawnPoint:
   - {fileID: 527362574}
   - {fileID: 335709011}
   - {fileID: 483405449}
@@ -1250,7 +1250,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7765667, y: 1}
+    m_SensorSize: {x: 1.7794118, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1353,10 +1353,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 54592708}
-  spawnRate: 5
+  spawnRate: 1
   spawnRateIncreaseModifier: 1.1
   spawnRateIncreaseInterval: 10
-  postWaveWaitTime: 15
+  setPostWaveWaitTime: 15
   setWaves:
   - {fileID: 11400000, guid: 2defadd5acf970f4ea15e0aee72482f8, type: 2}
   - {fileID: 11400000, guid: a24de50e588460347af035aed2f0d755, type: 2}
@@ -1743,7 +1743,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh26062
+  m_Name: pb_Mesh30268
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2603,7 +2603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 11400000, guid: a72837c826df1054abd8581f62e755ed, type: 2}
-  dynabearPrefab: {fileID: 6529857234144019684, guid: 08e3608f4ed99a24ba3e5780a27b7519, type: 3}
+  dynabearPrefab: {fileID: 0}
   gravitationalForce: -9.81
   controllerDeadzone: 0.1
   gamepadRotateSmoothing: 1000

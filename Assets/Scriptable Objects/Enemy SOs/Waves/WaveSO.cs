@@ -5,7 +5,7 @@ using System.Linq;
 [CreateAssetMenu(fileName = "New Wave", menuName = "Scriptable Objects/Wave")]
 public class WaveSO : ScriptableObject
 {
-    // public int index;
+    public int index;
     
     [Range(1, 500)] public int enemyCount;
     public int[] enemyTypes;
@@ -13,7 +13,7 @@ public class WaveSO : ScriptableObject
     [Range(1f, 50f)] public float completionReward;
     public bool isCompleted;
 
-    void Reset()
+    public void Reset()
     {
         isCompleted = false;
     }

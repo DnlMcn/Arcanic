@@ -7,6 +7,7 @@ public class BasicEnemy : MonoBehaviour
 {
     public event Action OnDestroyed;
     public static int enemiesKilled;
+    public static int enemiesSpawned;
 
     public EnemySO enemyType;
     public static EnemyRuntimeSet globalRuntimeSet;
@@ -29,6 +30,8 @@ public class BasicEnemy : MonoBehaviour
     {
         globalRuntimeSet.Add(this);
         runtimeSet.Add(this);
+        
+        enemiesSpawned++;
     }
 
     void OnDisable()
@@ -37,7 +40,6 @@ public class BasicEnemy : MonoBehaviour
         runtimeSet.Remove(this);
 
         enemiesKilled++;
-        Debug.Log("Enemies killed: " + enemiesKilled);
         WaveManager.CheckWaveCompletion();
     }
 

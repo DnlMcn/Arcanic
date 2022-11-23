@@ -6,13 +6,17 @@ public class EnemyManager : MonoBehaviour
 {
     public static int enemiesSpawned;
     public static GameObject[] EnemyPrefabs;
+    [SerializeField] GameObject[] setEnemyPrefabs;
     public EnemyRuntimeSet GlobalEnemyRuntimeSet;
 
-    [SerializeField] Transform[] SpawnPoints;
+    static Transform[] SpawnPoints;
+    [SerializeField] Transform[] setSpawnPoint;
 
     void Awake()
     {
         GlobalEnemyRuntimeSet.Items.Clear();
+        EnemyPrefabs = setEnemyPrefabs;
+        SpawnPoints = setSpawnPoint;
     }
 
     public static void SpawnNewEnemy(GameObject prefab) 
