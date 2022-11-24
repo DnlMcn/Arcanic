@@ -374,9 +374,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChangeUnit",
+                    "name": "GoLeft",
                     "type": "Button",
                     "id": "ad574d51-003b-4a5b-a863-fbdfc5a0e480",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GoRight",
+                    "type": "Button",
+                    "id": "ddeb33bd-a857-48c0-8952-d42595ad6466",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -402,18 +411,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KBM",
-                    "action": "ChangeUnit",
+                    "action": "GoLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "25f8a094-cbaa-47b7-b193-19e0ccbf6759",
+                    "id": "6a2f7dea-cea6-4998-b390-12c2afe9614f",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeUnit",
+                    "action": "GoRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

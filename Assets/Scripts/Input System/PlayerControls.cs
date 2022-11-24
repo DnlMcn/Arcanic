@@ -396,9 +396,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ChangeUnit"",
+                    ""name"": ""GoLeft"",
                     ""type"": ""Button"",
                     ""id"": ""ad574d51-003b-4a5b-a863-fbdfc5a0e480"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GoRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""ddeb33bd-a857-48c0-8952-d42595ad6466"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -424,18 +433,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""ChangeUnit"",
+                    ""action"": ""GoLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""25f8a094-cbaa-47b7-b193-19e0ccbf6759"",
+                    ""id"": ""6a2f7dea-cea6-4998-b390-12c2afe9614f"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChangeUnit"",
+                    ""action"": ""GoRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -489,7 +498,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // UnitManager
         m_UnitManager = asset.FindActionMap("UnitManager", throwIfNotFound: true);
         m_UnitManager_Confirm = m_UnitManager.FindAction("Confirm", throwIfNotFound: true);
-        m_UnitManager_ChangeUnit = m_UnitManager.FindAction("ChangeUnit", throwIfNotFound: true);
+        m_UnitManager_GoLeft = m_UnitManager.FindAction("GoLeft", throwIfNotFound: true);
+        m_UnitManager_GoRight = m_UnitManager.FindAction("GoRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -680,13 +690,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UnitManager;
     private IUnitManagerActions m_UnitManagerActionsCallbackInterface;
     private readonly InputAction m_UnitManager_Confirm;
-    private readonly InputAction m_UnitManager_ChangeUnit;
+    private readonly InputAction m_UnitManager_GoLeft;
+    private readonly InputAction m_UnitManager_GoRight;
     public struct UnitManagerActions
     {
         private @PlayerControls m_Wrapper;
         public UnitManagerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Confirm => m_Wrapper.m_UnitManager_Confirm;
-        public InputAction @ChangeUnit => m_Wrapper.m_UnitManager_ChangeUnit;
+        public InputAction @GoLeft => m_Wrapper.m_UnitManager_GoLeft;
+        public InputAction @GoRight => m_Wrapper.m_UnitManager_GoRight;
         public InputActionMap Get() { return m_Wrapper.m_UnitManager; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -699,9 +711,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Confirm.started -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnConfirm;
                 @Confirm.performed -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnConfirm;
                 @Confirm.canceled -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnConfirm;
-                @ChangeUnit.started -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnChangeUnit;
-                @ChangeUnit.performed -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnChangeUnit;
-                @ChangeUnit.canceled -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnChangeUnit;
+                @GoLeft.started -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnGoLeft;
+                @GoLeft.performed -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnGoLeft;
+                @GoLeft.canceled -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnGoLeft;
+                @GoRight.started -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnGoRight;
+                @GoRight.performed -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnGoRight;
+                @GoRight.canceled -= m_Wrapper.m_UnitManagerActionsCallbackInterface.OnGoRight;
             }
             m_Wrapper.m_UnitManagerActionsCallbackInterface = instance;
             if (instance != null)
@@ -709,9 +724,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Confirm.started += instance.OnConfirm;
                 @Confirm.performed += instance.OnConfirm;
                 @Confirm.canceled += instance.OnConfirm;
-                @ChangeUnit.started += instance.OnChangeUnit;
-                @ChangeUnit.performed += instance.OnChangeUnit;
-                @ChangeUnit.canceled += instance.OnChangeUnit;
+                @GoLeft.started += instance.OnGoLeft;
+                @GoLeft.performed += instance.OnGoLeft;
+                @GoLeft.canceled += instance.OnGoLeft;
+                @GoRight.started += instance.OnGoRight;
+                @GoRight.performed += instance.OnGoRight;
+                @GoRight.canceled += instance.OnGoRight;
             }
         }
     }
@@ -753,6 +771,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IUnitManagerActions
     {
         void OnConfirm(InputAction.CallbackContext context);
-        void OnChangeUnit(InputAction.CallbackContext context);
+        void OnGoLeft(InputAction.CallbackContext context);
+        void OnGoRight(InputAction.CallbackContext context);
     }
 }

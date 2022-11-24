@@ -10,6 +10,7 @@ public class IconChange : MonoBehaviour
     private InputAction goLeft;
     private InputAction goRight;
     private InputAction Confirm;
+
     GameObject[] icons = new GameObject[3];
     private Image icon;
     int index = 0;
@@ -35,21 +36,32 @@ public class IconChange : MonoBehaviour
         icon.sprite = icons[index].GetComponent<Image>().sprite;
     }
 
-    void GoRight()
+    void GoRight(InputAction.CallbackContext context)
     {
         index++;
+        Debug.Log("Pre-operação " + index);
+        index = index > icons.Length - 1 ? 0 : index;
+        Debug.Log("Pos-operação " + index);
     }
 
-    void GoLeft()
+    void GoLeft(InputAction.CallbackContext context)
     {
-        
         index--;
+        Debug.Log("Pre-operação " + index);
+        index = index < 0 ? icons.Length - 1 : index;
+        Debug.Log("Pos-operação " + index);
     }
 
     private void OnEnable() 
     {
-        goLeft = playerControls.UnitManager.ChangeUnit;
-        goRight = playerControls.UnitManager.ChangeUnit;
+        goRight = playerControls.UnitManager.GoRight;
+        goLeft = playerControls.UnitManager.GoLeft;
+
+        goRight.performed += GoRight;
+        goLeft.performed += GoLeft;
+
+        
+
         playerControls.Enable();
     }
     private void OnDisable() 
