@@ -8,12 +8,13 @@ public class WaveManager : MonoBehaviour
     [SerializeField] EnemyManager enemyManager;
     private static CoroutineExecuter instance;
 
-    [SerializeField] [Range(0.2f, 60f)] private float spawnRate = 3f;
-    [SerializeField] [Range(1f, 2f)] private float spawnRateIncreaseModifier = 1.05f;
+    private static float spawnRate;
+    [SerializeField] [Range(0.2f, 60f)] float setSpawnRate = 1.5f;
+    [SerializeField] [Range(1f, 2f)] private float spawnRateIncreaseModifier = 1.1f;
     [SerializeField] [Range(1f, 60f)] private float spawnRateIncreaseInterval = 10f;
 
     private static float postWaveWaitTime;
-    [SerializeField] [Range(0f, 30f)] private float setPostWaveWaitTime = 15f;
+    [SerializeField] [Range(0f, 30f)] private float setPostWaveWaitTime = 5f;
 
     static WaveSO[] waves;
     [SerializeField] private WaveSO[] setWaves;
@@ -21,19 +22,20 @@ public class WaveManager : MonoBehaviour
     private static int enemyCountDifference;  // Essa variável é usada para que seja contado corretamente o número de inimigos de cada onda em CheckWaveCompletion()
 
     private static bool canStartWave = true;
-    private bool isInSpawnCooldown = false;
+    private static bool isInSpawnCooldown = false;
 
     void Awake()
     {
         waves = setWaves;
         postWaveWaitTime = setPostWaveWaitTime;
+        spawnRate = setSpawnRate;
 
         ResetAllWaves();
     }
 
     void Start()
     {
-        StartCoroutine(StartWaves());
+        StartCoroutine(StartNextWave());
         StartCoroutine(IncreaseSpawnRate());
     }
 
@@ -45,13 +47,7 @@ public class WaveManager : MonoBehaviour
     // Esse método é chamado toda vez que um inimigo é morto.
     public static void CheckWaveCompletion()
     {
-        if(!instance)
-        {
-            instance = FindObjectOfType<CoroutineExecuter>();
-
-            if(!instance)
-                instance = new GameObject("CoroutineExecuter").AddComponent<CoroutineExecuter>();
-        }
+        CheckCoroutineExecuter();
 
         foreach (WaveSO wave in waves)
         {
@@ -61,51 +57,55 @@ public class WaveManager : MonoBehaviour
                 ResourceManager.Matter.Add(wave.completionReward);
                 instance.StartCoroutine(PostWaveCooldown());
                 currentWave++;
+                instance.StartCoroutine(StartNextWave());
             }
         }
     }
 
-    void ExecuteWave(WaveSO wave)
+    static IEnumerator ExecuteWave(WaveSO wave)
     {
         foreach (int enemyType in wave.enemyTypes)
         {
-            while (BasicEnemy.enemiesSpawned <= wave.enemyCount / wave.enemyTypes.Length)
+            while (BasicEnemy.enemiesSpawned < wave.enemyCount / wave.enemyTypes.Length)
             {
                 if (!isInSpawnCooldown)
                 {
-                    Debug.Log("Spawning enemy");
                     EnemyManager.SpawnNewEnemy(EnemyManager.EnemyPrefabs[enemyType]);
-                    StartCoroutine(PostSpawnCooldown());
-                }
-                else
-                {
-                    break;
+                    isInSpawnCooldown = true;
+                    yield return new WaitForSeconds(spawnRate);
+                    isInSpawnCooldown = false;
                 }
             }
         }
+
+        yield return null;
     }
 
-    IEnumerator StartWaves()
+    static IEnumerator StartNextWave()
     {
-        while (canStartWave)
-        {
-            ExecuteWave(waves[currentWave]);
-            canStartWave = false;
-        }
+        CheckCoroutineExecuter();
+
+        instance.StartCoroutine(ExecuteWave(waves[currentWave]));
         
-        yield return new WaitForSeconds(0);
+        yield return null;
     }
 
     static IEnumerator PostWaveCooldown()
     {
+        CheckCoroutineExecuter();
+
         yield return new WaitForSeconds(postWaveWaitTime);
-        canStartWave = true;
+        instance.StartCoroutine(StartNextWave());
     }
 
     IEnumerator IncreaseSpawnRate()
     {
-        spawnRate /= spawnRateIncreaseModifier;
-        yield return new WaitForSeconds(spawnRateIncreaseInterval);
+        while (true)
+        {
+            yield return new WaitForSeconds(spawnRateIncreaseInterval);
+            spawnRate /= spawnRateIncreaseModifier;
+        }
+    
     }
 
     IEnumerator PostSpawnCooldown()
@@ -120,6 +120,17 @@ public class WaveManager : MonoBehaviour
         foreach (WaveSO wave in waves)
         {
             wave.Reset();
+        }
+    }
+
+    static void CheckCoroutineExecuter()
+    {
+        if(!instance)
+        {
+            instance = FindObjectOfType<CoroutineExecuter>();
+
+            if(!instance)
+                instance = new GameObject("CoroutineExecuter").AddComponent<CoroutineExecuter>();
         }
     }
 }

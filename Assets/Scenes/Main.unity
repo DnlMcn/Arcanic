@@ -1250,7 +1250,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7794118, y: 1}
+    m_SensorSize: {x: 1.7765667, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1353,7 +1353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 54592708}
-  spawnRate: 1
+  setSpawnRate: 1.5
   spawnRateIncreaseModifier: 1.1
   spawnRateIncreaseInterval: 10
   setPostWaveWaitTime: 15
