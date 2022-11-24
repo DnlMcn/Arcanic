@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoUpdater : MonoBehaviour
+public class AmmoDisplay : MonoBehaviour
 {
     [SerializeField] GameObject player;
 

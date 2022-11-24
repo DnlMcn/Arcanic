@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceUpdater : MonoBehaviour
+public class ResourceDisplay : MonoBehaviour
 {
     [SerializeField] GameObject bloodHUD;
     [SerializeField] GameObject metalHUD;

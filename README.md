@@ -1,10 +1,11 @@
 # Arcanic
 
-Version: [Pre-alpha 0.3.1]
+Versão: [Alpha 0.3.1]
+
 
 Arcanic é o jogo sendo desenvolvido como nosso Trabalho de Conclusão de Curso (TCC).
 
-A versão do Unity sendo usada atualmente é a [2022.1.0b11](https://unity3d.com/unity/beta/2022.1.0b11)
+A versão do Unity sendo usada atualmente é a 2021.3.8f1
 
 Membros: Danilo Mancini, Diogo de Azevedo, Eduardo Dias, Felix Hioki, Gustavo Gomes, Maria Eduarda e Mateus Sena.
 
@@ -26,4 +27,4 @@ Maria Eduarda: Assistência de Arte, Redes Sociais e Assistência Geral
 Mateus Sena: Assistência Criativa, Assistência Geral
 
 
-O código, em sua maior parte, está em inglês (porque eu [Danilo] prefiro digitar código em inglês). Os comentários são em português pra facilitar o entendimento para os outros integrantes.
+O código, em sua maior parte, está em inglês (porque eu, Danilo, prefiro digitar código em inglês). Os comentários são em português pra facilitar o entendimento para os outros integrantes.

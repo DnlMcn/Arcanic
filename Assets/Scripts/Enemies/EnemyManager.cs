@@ -4,47 +4,25 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] [Range(0.2f, 60f)] private float spawnRate = 5f;
-    [SerializeField] [Range(1f, 2f)] private float spawnRateIncreaseModifier = 1.1f;
-    [SerializeField] [Range(1f, 60f)] private float spawnRateIncreaseInterval = 10f;
-
-    [SerializeField] Transform[] SpawnPoints;
-    [SerializeField] GameObject EnemyPrefab;
-
+    public static int enemiesSpawned;
+    public static GameObject[] EnemyPrefabs;
+    [SerializeField] GameObject[] setEnemyPrefabs;
     public EnemyRuntimeSet GlobalEnemyRuntimeSet;
+
+    static Transform[] SpawnPoints;
+    [SerializeField] Transform[] setSpawnPoint;
 
     void Awake()
     {
         GlobalEnemyRuntimeSet.Items.Clear();
+        EnemyPrefabs = setEnemyPrefabs;
+        SpawnPoints = setSpawnPoint;
     }
 
-    void Start()
+    public static void SpawnNewEnemy(GameObject prefab) 
     {
-        StartCoroutine(EnemySpawning());
-        StartCoroutine(IncreaseSpawnRate());
-    }
-
-    IEnumerator EnemySpawning()
-    {
-        while (true)
-        {
-            SpawnNewEnemy();
-            yield return new WaitForSeconds(spawnRate);
-        }
-    }
-
-    IEnumerator IncreaseSpawnRate()
-    {
-        while (true)
-        {
-            spawnRate /= spawnRateIncreaseModifier;
-            yield return new WaitForSeconds(spawnRateIncreaseInterval);
-        }
-    }
-
-    void SpawnNewEnemy() 
-    {
-        int spawnPoint = Mathf.RoundToInt(Random.Range(0f, SpawnPoints.Length-1));
-        Instantiate(EnemyPrefab, SpawnPoints[spawnPoint].transform.position, Quaternion.identity);
+        int spawnPoint = Mathf.RoundToInt(Random.Range(0f, SpawnPoints.Length - 1));
+        Instantiate(prefab, SpawnPoints[spawnPoint].transform.position, Quaternion.identity);
+        enemiesSpawned++;
     }
 }
