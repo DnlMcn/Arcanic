@@ -3402,7 +3402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -49.99341}
+  m_AnchoredPosition: {x: 0, y: -49.993164}
   m_SizeDelta: {x: 228.208, y: 99.987}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &622853327
@@ -4983,7 +4983,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7784201, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -5804,6 +5804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 54592708}
+  SpawnUnit: {fileID: 1300819156}
   setSpawnRate: 1.5
   spawnRateIncreaseModifier: 1.1
   spawnRateIncreaseInterval: 10
@@ -11870,6 +11871,11 @@ MonoBehaviour:
   gamepadRotateSmoothing: 1000
   isGamepad: 0
   isPaused: {fileID: 0}
+  isGamepad: 0
+  dynabear: {fileID: 0}
+  slinger: {fileID: 0}
+  factory: {fileID: 0}
+  spheroid: {fileID: 0}
 --- !u!1 &2120605857
 GameObject:
   m_ObjectHideFlags: 0

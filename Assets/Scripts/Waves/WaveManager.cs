@@ -8,6 +8,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] EnemyManager enemyManager;
     private static CoroutineExecuter instance;
 
+     [SerializeField] public Canvas spawnUnit;
+
     private static float spawnRate;
     [SerializeField] [Range(0.2f, 60f)] float setSpawnRate = 1.5f;
     [SerializeField] [Range(1f, 2f)] private float spawnRateIncreaseModifier = 1.1f;
