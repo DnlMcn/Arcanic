@@ -6,25 +6,23 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] EnemyManager enemyManager;
-    private static CoroutineExecuter instance;
+    static CoroutineExecuter instance;
 
-     [SerializeField] public Canvas spawnUnit;
-
-    private static float spawnRate;
+    static float spawnRate;
     [SerializeField] [Range(0.2f, 60f)] float setSpawnRate = 1.5f;
-    [SerializeField] [Range(1f, 2f)] private float spawnRateIncreaseModifier = 1.1f;
-    [SerializeField] [Range(1f, 60f)] private float spawnRateIncreaseInterval = 10f;
+    [SerializeField] [Range(1f, 2f)] float spawnRateIncreaseModifier = 1.1f;
+    [SerializeField] [Range(1f, 60f)] float spawnRateIncreaseInterval = 10f;
 
-    private static float postWaveWaitTime;
-    [SerializeField] [Range(0f, 30f)] private float setPostWaveWaitTime = 5f;
+    static float postWaveWaitTime;
+    [SerializeField] [Range(0f, 30f)] float setPostWaveWaitTime = 5f;
+    public static bool isInPostWaveCooldown = false;
 
     static WaveSO[] waves;
-    [SerializeField] private WaveSO[] setWaves;
+    [SerializeField] WaveSO[] setWaves;
     static int currentWave = 0;
-    private static int enemyCountDifference;  // Essa variável é usada para que seja contado corretamente o número de inimigos de cada onda em CheckWaveCompletion()
+    static int enemyCountDifference;
 
-    private static bool canStartWave = true;
-    private static bool isInSpawnCooldown = false;
+    static bool isInSpawnCooldown = false;
 
     void Awake()
     {
@@ -37,13 +35,47 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(StartNextWave());
+        StartNextWave();
         StartCoroutine(IncreaseSpawnRate());
     }
 
-    void OnDisable()
+    static IEnumerator ExecuteWave(WaveSO wave)
     {
+        CheckCoroutineExecuter();
 
+        for (int index = 0; index <= wave.enemyTypesIncluded.Length - 1; index++)
+        {
+            if (wave.enemyTypesIncluded[index])
+                instance.StartCoroutine(LoopSpawnOfEnemyType(wave, index, wave.enemyTypeCounts[index]));
+        }
+
+        yield return new WaitForEndOfFrame();
+    }
+
+    static IEnumerator LoopSpawnOfEnemyType(WaveSO wave, int enemyType, int enemyCount)
+    {
+        int index = 0;
+        while (index < enemyCount)
+        {
+            if (!isInSpawnCooldown)
+            {
+                instance.StartCoroutine(HandleEnemySpawn(enemyType));
+                index++;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForEndOfFrame();
+    }
+
+    static IEnumerator HandleEnemySpawn(int enemyType)
+    {
+        EnemyManager.SpawnNewEnemy(EnemyManager.EnemyPrefabs[enemyType]);
+
+        isInSpawnCooldown = true;
+        yield return new WaitForSeconds(spawnRate);
+        isInSpawnCooldown = false;
     }
 
     // Esse método é chamado toda vez que um inimigo é morto.
@@ -51,53 +83,46 @@ public class WaveManager : MonoBehaviour
     {
         CheckCoroutineExecuter();
 
-        foreach (WaveSO wave in waves)
-        {
-            if (!wave.isCompleted && BasicEnemy.enemiesKilled >= wave.enemyCount)
+        if (!waves[currentWave].isCompleted)
+        {       
+            waves[currentWave].CountEnemyTotal();
+            if (BasicEnemy.enemiesKilled - enemyCountDifference >= waves[currentWave].totalEnemyCount)
             {
-                wave.isCompleted = true;
-                ResourceManager.Matter.Add(wave.completionReward);
-                instance.StartCoroutine(PostWaveCooldown());
-                currentWave++;
-                instance.StartCoroutine(StartNextWave());
+                OnWaveCompletion(waves[currentWave]);
+                Debug.Log("Completed wave " + waves[currentWave].index);
             }
         }
     }
 
-    static IEnumerator ExecuteWave(WaveSO wave)
-    {
-        foreach (int enemyType in wave.enemyTypes)
-        {
-            while (BasicEnemy.enemiesSpawned < wave.enemyCount / wave.enemyTypes.Length)
-            {
-                if (!isInSpawnCooldown)
-                {
-                    EnemyManager.SpawnNewEnemy(EnemyManager.EnemyPrefabs[enemyType]);
-                    isInSpawnCooldown = true;
-                    yield return new WaitForSeconds(spawnRate);
-                    isInSpawnCooldown = false;
-                }
-            }
-        }
-
-        yield return null;
-    }
-
-    static IEnumerator StartNextWave()
+    static void OnWaveCompletion(WaveSO wave)
     {
         CheckCoroutineExecuter();
 
-        instance.StartCoroutine(ExecuteWave(waves[currentWave]));
-        
-        yield return null;
+        wave.isCompleted = true;
+        ResourceManager.Matter.Add(wave.completionReward);
+        instance.StartCoroutine(PostWaveCooldown());
+        enemyCountDifference += wave.totalEnemyCount;
+        currentWave += currentWave <= waves.Length - 1 ? 1 : 0;
+    }
+
+    static void StartNextWave()
+    {
+        if (currentWave <= waves.Length - 1)
+        {
+            CheckCoroutineExecuter();
+
+            instance.StartCoroutine(ExecuteWave(waves[currentWave]));
+        }
     }
 
     static IEnumerator PostWaveCooldown()
     {
         CheckCoroutineExecuter();
 
+        isInPostWaveCooldown = true;
         yield return new WaitForSeconds(postWaveWaitTime);
-        instance.StartCoroutine(StartNextWave());
+        isInPostWaveCooldown = false;
+        StartNextWave();
     }
 
     IEnumerator IncreaseSpawnRate()
@@ -107,14 +132,6 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(spawnRateIncreaseInterval);
             spawnRate /= spawnRateIncreaseModifier;
         }
-    
-    }
-
-    IEnumerator PostSpawnCooldown()
-    {  
-        isInSpawnCooldown = true;
-        yield return new WaitForSeconds(spawnRate);
-        isInSpawnCooldown = false;
     }
 
     void ResetAllWaves()
@@ -125,6 +142,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    // Essa função precisa ser chamado quando uma função static precisa iniciar uma função IEnumerator
     static void CheckCoroutineExecuter()
     {
         if(!instance)
