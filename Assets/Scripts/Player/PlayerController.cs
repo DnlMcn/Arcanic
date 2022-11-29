@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerCharacterSO character;
+    [SerializeField] GameObject dynabearPrefab;
 
     public static Vector3 position;
 
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private Vector2 aim;
     private bool canDash = true;
-    private bool isAirborne = false;
+    public static bool isAirborne = false;
 
     private Vector3 playerVelocity;
 
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         playerControls.Player.Dash.performed += ctx => StartCoroutine(Dash());
+        playerControls.Player.CreateDynabear.performed += ctx => DeployDynabear();
     }
 
     private void Start() 
@@ -116,6 +118,15 @@ public class PlayerController : MonoBehaviour
                 Vector3 point = ray.GetPoint(rayDistance);
                 LookAt(point);
             }
+        }
+    }
+
+    void DeployDynabear()
+    {
+        if (ResourceManager.Matter.Value >= 5)
+        {
+            Instantiate(dynabearPrefab, transform.Find("Unit Spawn Point").position, Quaternion.identity);
+            ResourceManager.Matter.Value -= 5;
         }
     }
 
