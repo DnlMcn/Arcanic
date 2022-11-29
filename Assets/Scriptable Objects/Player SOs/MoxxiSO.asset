@@ -18,7 +18,7 @@ MonoBehaviour:
   primary2: {fileID: 11400000, guid: 8ec72b29d53683a408b7c753b15b0e5b, type: 2}
   maxHealth: 100
   regen: 5
-  movementSpeed: 8
+  movementSpeed: 12
   dashScale: 5
   dashDuration: 0.2
   dashCooldown: 1
