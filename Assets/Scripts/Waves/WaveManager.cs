@@ -17,9 +17,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField] [Range(0f, 30f)] float setPostWaveWaitTime = 5f;
     public static bool isInPostWaveCooldown = false;
 
-    static WaveSO[] waves;
+    public static WaveSO[] waves;
     [SerializeField] WaveSO[] setWaves;
-    static int currentWave = 0;
+    public static int currentWave = 0;
     static int enemyCountDifference;
 
     static bool isInSpawnCooldown = false;

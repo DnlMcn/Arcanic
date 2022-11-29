@@ -1,6 +1,6 @@
 # Arcanic
 
-Versão: [Alpha 0.3.1]
+Versão: [Alpha 0.4.0]
 
 
 Arcanic é o jogo sendo desenvolvido como nosso Trabalho de Conclusão de Curso (TCC).
