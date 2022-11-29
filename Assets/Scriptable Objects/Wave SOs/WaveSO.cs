@@ -6,9 +6,9 @@ using System.Linq;
 public class WaveSO : ScriptableObject
 {
     public int index;
-    
-    public int totalEnemyCount;
 
+    public int totalEnemyCount = 0;
+    private bool hasCountedEnemyTotal = false;
     public bool[] enemyTypesIncluded;
     [Range(1, 1000)] public int[] enemyTypeCounts;
 
@@ -16,12 +16,17 @@ public class WaveSO : ScriptableObject
     [Range(1f, 50f)] public float completionReward;
     public bool isCompleted;
 
-    void Start()
+    public void CountEnemyTotal()
     {
-        foreach (int typeCount in enemyTypeCounts)
+        if (!hasCountedEnemyTotal)
         {
-            totalEnemyCount += typeCount;
+            foreach (int typeCount in enemyTypeCounts)
+            {
+                totalEnemyCount += typeCount;
+            }
+            hasCountedEnemyTotal = true;
         }
+
     }
 
     public void Reset()

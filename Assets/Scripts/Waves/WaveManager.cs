@@ -15,6 +15,7 @@ public class WaveManager : MonoBehaviour
 
     static float postWaveWaitTime;
     [SerializeField] [Range(0f, 30f)] float setPostWaveWaitTime = 5f;
+    public static bool isInPostWaveCooldown = false;
 
     static WaveSO[] waves;
     [SerializeField] WaveSO[] setWaves;
@@ -82,11 +83,13 @@ public class WaveManager : MonoBehaviour
     {
         CheckCoroutineExecuter();
 
-        foreach (WaveSO wave in waves)
-        {
-            if (!wave.isCompleted && BasicEnemy.enemiesKilled >= wave.totalEnemyCount - enemyCountDifference)
+        if (!waves[currentWave].isCompleted)
+        {       
+            waves[currentWave].CountEnemyTotal();
+            if (BasicEnemy.enemiesKilled - enemyCountDifference >= waves[currentWave].totalEnemyCount)
             {
-                OnWaveCompletion(wave);
+                OnWaveCompletion(waves[currentWave]);
+                Debug.Log("Completed wave " + waves[currentWave].index);
             }
         }
     }
@@ -99,22 +102,26 @@ public class WaveManager : MonoBehaviour
         ResourceManager.Matter.Add(wave.completionReward);
         instance.StartCoroutine(PostWaveCooldown());
         enemyCountDifference += wave.totalEnemyCount;
-        currentWave++;
-        StartNextWave();
+        currentWave += currentWave <= waves.Length - 1 ? 1 : 0;
     }
 
     static void StartNextWave()
     {
-        CheckCoroutineExecuter();
+        if (currentWave <= waves.Length - 1)
+        {
+            CheckCoroutineExecuter();
 
-        instance.StartCoroutine(ExecuteWave(waves[currentWave]));
+            instance.StartCoroutine(ExecuteWave(waves[currentWave]));
+        }
     }
 
     static IEnumerator PostWaveCooldown()
     {
         CheckCoroutineExecuter();
 
+        isInPostWaveCooldown = true;
         yield return new WaitForSeconds(postWaveWaitTime);
+        isInPostWaveCooldown = false;
         StartNextWave();
     }
 
