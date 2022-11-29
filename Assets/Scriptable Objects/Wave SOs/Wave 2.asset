@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41eeb9e444e057845a09250753c43df9, type: 3}
   m_Name: Wave 2
   m_EditorClassIdentifier: 
-  enemyCount: 25
-  enemyTypes: 00000000
+  index: 0
+  totalEnemyCount: 0
+  enemyTypesIncluded: 01
+  enemyTypeCounts: 19000000
   difficultyRating: 0
   completionReward: 5
   isCompleted: 0

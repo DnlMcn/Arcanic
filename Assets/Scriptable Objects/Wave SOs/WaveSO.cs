@@ -7,11 +7,22 @@ public class WaveSO : ScriptableObject
 {
     public int index;
     
-    [Range(1, 500)] public int enemyCount;
-    public int[] enemyTypes;
+    public int totalEnemyCount;
+
+    public bool[] enemyTypesIncluded;
+    [Range(1, 1000)] public int[] enemyTypeCounts;
+
     [Range(1, 10000)] public int difficultyRating;
     [Range(1f, 50f)] public float completionReward;
     public bool isCompleted;
+
+    void Start()
+    {
+        foreach (int typeCount in enemyTypeCounts)
+        {
+            totalEnemyCount += typeCount;
+        }
+    }
 
     public void Reset()
     {

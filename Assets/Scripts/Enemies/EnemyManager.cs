@@ -23,6 +23,5 @@ public class EnemyManager : MonoBehaviour
     {
         int spawnPoint = Mathf.RoundToInt(Random.Range(0f, SpawnPoints.Length - 1));
         Instantiate(prefab, SpawnPoints[spawnPoint].transform.position, Quaternion.identity);
-        enemiesSpawned++;
     }
 }
