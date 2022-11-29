@@ -18,12 +18,17 @@ public class IconChange : MonoBehaviour
     [SerializeField] GameObject dynabear;
     [SerializeField] GameObject factory;
     [SerializeField] GameObject slinger;
+
+    private bool isInPostWaveCooldown;
     void Awake() 
     {
         playerControls = new PlayerControls();
     }
     void Start()
     {
+
+
+
         icon = this.GetComponent<Image>();
         
         icons[0] = dynabear;
@@ -34,6 +39,10 @@ public class IconChange : MonoBehaviour
     void Update()
     {
         icon.sprite = icons[index].GetComponent<Image>().sprite;
+        // if (isInPostWaveCooldown = true)
+        // {
+        //     this.SetActive(true);
+        // }
     }
 
     void GoRight(InputAction.CallbackContext context)
