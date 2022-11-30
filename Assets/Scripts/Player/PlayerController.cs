@@ -12,33 +12,35 @@ public class PlayerController : MonoBehaviour
 
     public static Vector3 position;
 
-    private float movementSpeed;
-    private float dashScale;
-    private float dashDuration;
-    private float dashCooldown;
+    float movementSpeed;
+    float dashScale;
+    float dashDuration;
+    float dashCooldown;
 
-    [SerializeField] private float gravitationalForce = -9.81f;
-    [SerializeField] private float controllerDeadzone = 0.1f;
-    [SerializeField] private float gamepadRotateSmoothing = 1000f;
+    float gravitationalForce = -9.81f;
+    [SerializeField] [Range(0.1f, 500f)] float gravityMultiplier;
+    [SerializeField] [Range(0.1f, 500f)]float gravityMultiplierDuringDash;
+    [SerializeField] float controllerDeadzone = 0.1f;
+    [SerializeField] float gamepadRotateSmoothing = 1000f;
 
-    [SerializeField] private bool isGamepad;
+    [SerializeField] bool isGamepad;
 
-    private CharacterController controller;
+    CharacterController characterController;
 
-    private Vector2 movement;
-    private Vector2 aim;
-    private bool canDash = true;
-    public static bool isAirborne = false;
+    Vector2 movement;
+    Vector2 aim;
+    bool canDash = true;
+    bool isDashing = false;
 
-    private Vector3 playerVelocity;
+    Vector3 velocity;
 
     public BoolVariable isPaused;
-    private PlayerControls playerControls;
-    private PlayerInput playerInput;
+    PlayerControls playerControls;
+    PlayerInput playerInput;
 
     private void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
         playerControls = new PlayerControls();
         playerInput = GetComponent<PlayerInput>();
 
@@ -68,11 +70,28 @@ public class PlayerController : MonoBehaviour
     {
         if (!isPaused.Value)
         {
+            HandleGravity();
             HandleInput();
             HandleMovement();
             HandleRotation();
 
             position = transform.position;
+        }
+    }
+
+    void HandleGravity()
+    {
+        if (characterController.isGrounded && velocity.y <= 0)
+        {
+            velocity.y = -1;
+        }
+        else if (isDashing)
+        {
+            velocity.y = gravitationalForce * gravityMultiplierDuringDash * Time.deltaTime;
+        }
+        else
+        {
+            velocity.y = gravitationalForce * gravityMultiplier * Time.deltaTime;
         }
     }
 
@@ -84,12 +103,8 @@ public class PlayerController : MonoBehaviour
 
     void HandleMovement()
     {
-        Vector3 move = new Vector3(movement.x, 0, movement.y);
-        controller.Move(move * Time.deltaTime * movementSpeed);
-
-        if (isAirborne) playerVelocity.y += gravitationalForce * Time.deltaTime;
-
-        controller.Move(playerVelocity * Time.deltaTime);
+        velocity = new Vector3(movement.x, velocity.y, movement.y);
+        characterController.Move(velocity * Time.deltaTime * movementSpeed);
     }
 
     void HandleRotation()
@@ -135,10 +150,15 @@ public class PlayerController : MonoBehaviour
         if (canDash)
         {
             canDash = false;
+
             movementSpeed *= dashScale;
+            isDashing = true;
             yield return new WaitForSeconds(dashDuration);
+
             movementSpeed /= dashScale;
+            isDashing = false;
             yield return new WaitForSeconds(dashCooldown);
+            
             canDash = true;
         }
     }
