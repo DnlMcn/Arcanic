@@ -33,6 +33,7 @@ public class Dynabear : BasicUnit
         if (!ressurecting)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius.Value);
+            AudioManager.Play("Dynabear0 Explosion");
 
             foreach (Collider collider in colliders)
             {

@@ -84,6 +84,7 @@ public class Shoot : MonoBehaviour
             if (isAuto) isShooting = true;
             Vector3 projectileSpawnPoint = transform.Find("ShootingPoint").position;
             Instantiate(selectedPrimary.projectile.prefab, projectileSpawnPoint, transform.rotation);
+            if (AudioManager.instance != null) AudioManager.Play("Gunshot");
             if (!infiniteAmmo) SubtractAmmo();
             canShoot = false;
             StartCoroutine(ShootingCooldown());

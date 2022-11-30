@@ -153,6 +153,7 @@ public class PlayerController : MonoBehaviour
 
             movementSpeed *= dashScale;
             isDashing = true;
+            AudioManager.Play("Dash");
             yield return new WaitForSeconds(dashDuration);
 
             movementSpeed /= dashScale;
