@@ -22,6 +22,8 @@ public class ResourceManager : MonoBehaviour
         Blood.Reset();
         Metal.Reset();
         Matter.Reset();
+
+        Matter.Add(50);
     }
 
     void SetResourceReferences()

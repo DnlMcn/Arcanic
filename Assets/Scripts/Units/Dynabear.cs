@@ -16,6 +16,7 @@ public class Dynabear : BasicUnit
     void Start()
     {
         GetUnitLevelData();
+        ResourceManager.Matter.Add(50);
     }
 
     void Update()

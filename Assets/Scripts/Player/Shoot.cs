@@ -21,7 +21,7 @@ public class Shoot : MonoBehaviour
     [SerializeField] PlayerCharacterSO character;
     [SerializeField] PrimaryAttackSO selectedPrimary;
 
-    [SerializeField] int primaryNumber = 1;
+    [SerializeField] int primaryNumber = 2;
     float rateOfFire;
     bool isAuto;
     [HideInInspector] public bool infiniteAmmo;
